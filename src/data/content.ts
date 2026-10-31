@@ -28,7 +28,7 @@ export interface Education {
   minor: string;
   dates: string;
   cgpa: string;
-  /** Whether to show the CGPA on the site — undecided. */
+  /** Whether to show the CGPA on the site. */
   showCgpa: boolean | Todo;
 }
 
@@ -136,7 +136,7 @@ export const content: SiteContent = {
     minor: "Artificial Intelligence",
     dates: "Aug 2023 – Present",
     cgpa: "7.53",
-    showCgpa: "TODO",
+    showCgpa: false,
   },
 
   projects: [
@@ -166,7 +166,11 @@ export const content: SiteContent = {
         { label: "Precision", value: 0.96, decimals: 2 },
       ],
       tags: ["FastAPI", "Streamlit", "PostgreSQL", "Redis", "Docker Compose", "OCI", "Nginx"],
-      links: { liveDemo: "TODO", apiDocs: "TODO", github: "TODO" },
+      links: {
+        liveDemo: "https://137-23-46-16.sslip.io/guardrails-ui/",
+        apiDocs: "https://137-23-46-16.sslip.io/docs",
+        github: "TODO",
+      },
     },
     {
       id: "agentscope",
@@ -178,7 +182,11 @@ export const content: SiteContent = {
       details:
         "LangGraph + LangSmith trace ingestion, unified run-level scoring, PostgreSQL persistence; FastAPI + Streamlit multi-container stack on Oracle Cloud with IP rate limiting behind Nginx/HTTPS.",
       tags: ["LangGraph", "LangSmith", "FastAPI", "PostgreSQL", "Docker", "OCI"],
-      links: { liveDemo: "TODO", apiDocs: "TODO", github: "TODO" },
+      links: {
+        liveDemo: "https://137-23-46-16.sslip.io/agentscope-ui/",
+        apiDocs: "https://137-23-46-16.sslip.io/agentscope/docs",
+        github: "TODO",
+      },
     },
     {
       id: "harshgpt",
@@ -191,7 +199,11 @@ export const content: SiteContent = {
       details:
         "LangChain + Qdrant + GPT-4o mini; metadata filtering and system-prompt guardrails; PDFPlumber table-aware parsing with MD5 deterministic chunk IDs; FastAPI + Redis caching + IP rate limiting; self-hosted Qdrant and Redis on an OCI ARM VM behind Nginx/HTTPS.",
       tags: ["LangChain", "Qdrant", "FastAPI", "Redis", "Docker", "OCI"],
-      links: { liveDemo: "TODO", apiDocs: "TODO", github: "TODO" },
+      links: {
+        liveDemo: "https://137-23-46-16.sslip.io/harshgpt-ui/",
+        apiDocs: "https://137-23-46-16.sslip.io/harshgpt/docs",
+        github: "TODO",
+      },
       alsoPowers: 'the "Ask my AI" section',
     },
   ],

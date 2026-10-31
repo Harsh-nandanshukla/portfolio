@@ -63,6 +63,17 @@ Hidden while scrolling down, shown again while scrolling up. On mobile: name + m
   A static gradient replaces it on mobile or reduced-motion.
 - Small mono label above the name: `AI/ML ENGINEER · IIT JODHPUR`
 - Name: "Harsh Nandan Shukla"
+#### Name intro animation ("cyclone assemble")
+- Plays once per browser session on first load (sessionStorage, wrapped in try/catch). Total ≤ 2.5s desktop, ≤ 1.8s mobile.
+- The name is split into letter spans (letters aria-hidden; the h1 keeps aria-label with the full name so screen readers read it normally).
+- Start: each letter begins off-screen, spread around the screen edges and corners (positions distributed by index on a large circle), at scale 0.2, opacity 0.
+- Motion: letters travel inward on a shrinking spiral (cyclone path, ~1–1.5 turns around the screen center) while growing from small to full size. Arrival is staggered ~60ms, so they lock into place one after another, left to right. Ease-out, no bounce or overshoot.
+- 3D solid look: perspective on the container; letters rotate in Y/X during flight and settle flat. Depth via a stacked text-shadow extrusion (5–6 layers in darker shades of --text), kept subtle in the resting state.
+- Spark: once the last letter lands, a narrow light sweep (white → --accent-1) passes left to right across the name in ~600ms. Each letter briefly brightens as the sweep passes, then returns to normal brightness.
+- After the spark: the label and the tagline fade in, then the buttons.
+- Never blocking: the navbar is visible and usable from the start. Any click, key press, or scroll instantly finishes the animation (letters jump to final position).
+- Performance: animate only transform, opacity and filter. The neural background starts after the intro ends.
+- prefers-reduced-motion: no intro; the name appears static immediately.
 - Tagline via Text Generate Effect: "Building production LLM systems — guardrails, RAG, and agent evaluation."
 - Buttons: **View Projects** (gradient, scrolls to projects) and **Download Resume** (outline).
 - Subtle scroll-down indicator at the bottom.

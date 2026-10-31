@@ -4,14 +4,14 @@ Work top to bottom. Stop for review at every 🔍.
 Status: `[ ]` todo · `[~]` in progress · `[x]` done
 
 ## Phase 0 — Setup
-- [ ] Create the Next.js app in the current folder (TypeScript, Tailwind, ESLint, App Router, `src/` dir)
-- [ ] Install Framer Motion (`motion`), set up shadcn/ui, add the `cn()` util
-- [ ] Add Geist + JetBrains Mono via `next/font`
-- [ ] Put the design tokens from DESIGN.md into `globals.css` and the Tailwind theme
-- [ ] Create `src/data/content.ts` from CONTENT.md (typed)
-- [ ] Create `.env.local` with `NEXT_PUBLIC_HARSHGPT_URL=` and add it to `.gitignore`
-- [ ] `git init`, first commit
-- [ ] 🔍 Review: blank dark page with the correct fonts running at localhost:3000
+- [x] Create the Next.js app in the current folder (TypeScript, Tailwind, ESLint, App Router, `src/` dir)
+- [x] Install Framer Motion (`motion`), set up shadcn/ui, add the `cn()` util
+- [x] Add Geist + JetBrains Mono via `next/font`
+- [x] Put the design tokens from DESIGN.md into `globals.css` and the Tailwind theme
+- [x] Create `src/data/content.ts` from CONTENT.md (typed)
+- [x] Create `.env.local` with `NEXT_PUBLIC_HARSHGPT_URL=` and add it to `.gitignore`
+- [x] `git init`, first commit
+- [x] 🔍 Review: blank dark page with the correct fonts running at localhost:3000
 
 ## Phase 1 — Skeleton
 - [ ] Page structure with an empty `<section id>` for every section

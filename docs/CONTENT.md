@@ -19,7 +19,7 @@ Items marked `TODO` must be filled in by Harsh. Do not invent them.
 ## Education
 - **Indian Institute of Technology Jodhpur** — Jodhpur, Rajasthan
 - B.Tech, Major in Materials & Metallurgical Engineering, Minor in Artificial Intelligence
-- Aug 2023 – Present · CGPA 7.53 (show CGPA: TODO decide yes/no)
+- Aug 2023 – Present · CGPA 7.53 (show CGPA on site: no)
 
 ## Projects
 
@@ -34,14 +34,14 @@ Items marked `TODO` must be filled in by Harsh. Do not invent them.
   - Toxic-BERT classifier: Precision 1.0, Recall 0.74, F1 0.85 at 128ms
 - **Headline metrics for the tile:** F1 0.97 · 92% cache hit rate · Precision 0.96
 - **Tags:** FastAPI · Streamlit · PostgreSQL · Redis · Docker Compose · OCI · Nginx
-- **Links:** Live Demo TODO · API Docs TODO · GitHub TODO
+- **Links:** Live Demo https://137-23-46-16.sslip.io/guardrails-ui/ · API Docs https://137-23-46-16.sslip.io/docs · GitHub TODO
 
 ### 2. AgentScope — LLM/Agent Evaluation Platform — Aug 2026
 - **One-liner:** Scores LLM agent runs by combining loop, budget, schema, and LLM-as-a-Judge signals.
 - **Details:** LangGraph + LangSmith trace ingestion, unified run-level scoring, PostgreSQL persistence;
   FastAPI + Streamlit multi-container stack on Oracle Cloud with IP rate limiting behind Nginx/HTTPS.
 - **Tags:** LangGraph · LangSmith · FastAPI · PostgreSQL · Docker · OCI
-- **Links:** Live Demo TODO · API Docs TODO · GitHub TODO
+- **Links:** Live Demo https://137-23-46-16.sslip.io/agentscope-ui/ · API Docs https://137-23-46-16.sslip.io/agentscope/docs · GitHub TODO
 
 ### 3. HarshGPT — Production RAG Chatbot — Mar 2026
 - **One-liner:** A production RAG chatbot with MMR retrieval, smart query routing, and table-aware PDF parsing.
@@ -49,7 +49,7 @@ Items marked `TODO` must be filled in by Harsh. Do not invent them.
   PDFPlumber table-aware parsing with MD5 deterministic chunk IDs; FastAPI + Redis caching +
   IP rate limiting; self-hosted Qdrant and Redis on an OCI ARM VM behind Nginx/HTTPS.
 - **Tags:** LangChain · Qdrant · FastAPI · Redis · Docker · OCI
-- **Links:** Live Demo TODO · API Docs TODO · GitHub TODO
+- **Links:** Live Demo https://137-23-46-16.sslip.io/harshgpt-ui/ · API Docs https://137-23-46-16.sslip.io/harshgpt/docs · GitHub TODO
 - **Also powers:** the "Ask my AI" section (endpoint: TODO)
 
 ## Experience & Research (timeline order: newest first)

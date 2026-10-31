@@ -47,8 +47,9 @@ docs/             these .md files
    if something is missing, leave a clearly marked `TODO` and tell me.
 3. **Colors and fonts only from the design tokens** in `globals.css` / Tailwind config.
    No random hex values in components.
-4. **Motion is subtle.** Fade-up on scroll, glows, count-ups. No bouncing, spinning,
-   or long blocking intro animations. Respect `prefers-reduced-motion` everywhere.
+4. **Motion is subtle.** Fade-up on scroll, glows, count-ups. No bouncing or spinning,
+   and no blocking intro animations. One exception: the hero name intro defined in
+   DESIGN.md (≤2.5s, skippable, once per session). Respect `prefers-reduced-motion` everywhere.
 5. **Mobile matters.** Check every section at 375px width. No horizontal scroll.
 6. **Performance:** Lighthouse performance 90+. Lazy-load heavy client components,
    use `next/image`, and keep the hero canvas light (pause it when off-screen).
