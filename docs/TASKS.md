@@ -1,0 +1,63 @@
+# TASKS.md — Build Checklist
+
+Work top to bottom. Stop for review at every 🔍.
+Status: `[ ]` todo · `[~]` in progress · `[x]` done
+
+## Phase 0 — Setup
+- [ ] Create the Next.js app in the current folder (TypeScript, Tailwind, ESLint, App Router, `src/` dir)
+- [ ] Install Framer Motion (`motion`), set up shadcn/ui, add the `cn()` util
+- [ ] Add Geist + JetBrains Mono via `next/font`
+- [ ] Put the design tokens from DESIGN.md into `globals.css` and the Tailwind theme
+- [ ] Create `src/data/content.ts` from CONTENT.md (typed)
+- [ ] Create `.env.local` with `NEXT_PUBLIC_HARSHGPT_URL=` and add it to `.gitignore`
+- [ ] `git init`, first commit
+- [ ] 🔍 Review: blank dark page with the correct fonts running at localhost:3000
+
+## Phase 1 — Skeleton
+- [ ] Page structure with an empty `<section id>` for every section
+- [ ] Floating glass navbar with smooth scroll and hide-on-scroll-down
+- [ ] Reusable `<Reveal>` wrapper (fade-up on scroll, reduced-motion aware)
+- [ ] 🔍 Review: navbar works and scrolls to each section
+
+## Phase 2 — Hero
+- [ ] `NeuralBackground.tsx` canvas: drifting nodes, connections, cursor interaction, paused off-screen
+- [ ] Static gradient fallback for mobile / reduced motion
+- [ ] Label, name, Text Generate Effect tagline, two CTAs, scroll indicator
+- [ ] 🔍 Review on desktop + mobile
+
+## Phase 3 — Projects (bento)
+- [ ] Bento Grid layout (featured 2×2 tile, two medium tiles; single column on mobile)
+- [ ] Card Spotlight hover on all tiles
+- [ ] Guardrails tile: Border Beam, looping 6-stage pipeline chips, Number Ticker metrics
+- [ ] Tech tags and Live Demo / API Docs / GitHub buttons
+- [ ] 🔍 Review
+
+## Phase 4 — Experience
+- [ ] Tracing Beam timeline with 3 entries and highlight metrics
+- [ ] 🔍 Review
+
+## Phase 5 — Skills
+- [ ] Two opposite-direction logo Marquee rows (pause on hover, faded edges)
+- [ ] Grouped text skill list below
+- [ ] 🔍 Review
+
+## Phase 6 — Contact & footer
+- [ ] Closing line, copy-to-clipboard email with toast, social icons, footer
+- [ ] 🔍 Review
+
+## Phase 7 — Ask my AI
+- [ ] Chat card UI: input, suggestion chips, typing indicator
+- [ ] Connect to the HarshGPT API (streaming if supported), with an error fallback
+- [ ] Confirm CORS on the HarshGPT backend allows the portfolio domain
+- [ ] 🔍 Review with real questions
+
+## Phase 8 — Polish & ship
+- [ ] Resume PDF in `public/`, favicon, OG image, metadata
+- [ ] Full mobile pass at 375px / 768px
+- [ ] Reduced-motion pass
+- [ ] Lighthouse: performance 90+, accessibility 90+
+- [ ] `npm run build` passes with no errors
+- [ ] Push to GitHub, deploy on Vercel, add env variable in Vercel
+- [ ] Add CORS for the Vercel domain on HarshGPT
+- [ ] 🔍 Final review on a real phone
+- [ ] Add the site link to resume, LinkedIn, and GitHub profile README
