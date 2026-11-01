@@ -16,7 +16,7 @@ export interface Identity {
   email: string;
   github: string;
   linkedin: string;
-  /** Path under public/. The PDF itself still needs to be placed in public/. */
+  /** Path under public/ (public/resume.pdf). */
   resume: string;
 }
 
@@ -126,6 +126,16 @@ export interface NavItem {
   href: string;
 }
 
+/** Hero section strings (DESIGN.md §2). Name, label and tagline come from `identity`. */
+export interface HeroStrings {
+  /** Gradient button, scrolls to the projects section. */
+  primaryCta: string;
+  /** Outline button, downloads identity.resume. */
+  secondaryCta: string;
+  /** Screen-reader label for the scroll-down indicator (links to the Ask my AI section). */
+  scrollHint: string;
+}
+
 /** Small interface strings (screen-reader labels etc.). */
 export interface UiStrings {
   navAriaLabel: string;
@@ -136,6 +146,7 @@ export interface UiStrings {
 export interface SiteContent {
   identity: Identity;
   sections: Sections;
+  hero: HeroStrings;
   /** Navbar entries, in display order. Add one object to add a link. */
   nav: NavItem[];
   ui: UiStrings;
@@ -160,7 +171,6 @@ const identity: Identity = {
   email: "shuklaharshnandan@gmail.com",
   github: "https://github.com/Harsh-nandanshukla",
   linkedin: "https://www.linkedin.com/in/harsh-shukla-a87b0a2b0/",
-  // TODO: place resume.pdf in public/ (the Resume button 404s until then)
   resume: "/resume.pdf",
 };
 
@@ -177,6 +187,13 @@ const sections: Sections = {
 export const content: SiteContent = {
   identity,
   sections,
+
+  // Button labels from DESIGN.md §2 Hero.
+  hero: {
+    primaryCta: "View Projects",
+    secondaryCta: "Download Resume",
+    scrollHint: "Scroll down to Ask my AI",
+  },
 
   // Labels from DESIGN.md §1 Navbar: Projects · Experience · Skills · Contact + "Resume".
   nav: [

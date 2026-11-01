@@ -8,12 +8,14 @@ import { Contact } from "@/components/sections/Contact";
 
 // Layout (DESIGN.md): max width 1120px, side padding 16px / 24px (md+),
 // section spacing 80px / 128px (md+). md = 768px.
+// The hero sits outside <main>'s max width so its background can span the full screen;
+// its own content is constrained to the same 1120px inside Hero.tsx.
 export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="mx-auto flex w-full max-w-content flex-1 flex-col gap-20 px-4 pb-20 md:gap-32 md:px-6 md:pb-32">
-        <Hero />
+      <Hero />
+      <main className="mx-auto mt-20 flex w-full max-w-content flex-1 flex-col gap-20 px-4 pb-20 md:mt-32 md:gap-32 md:px-6 md:pb-32">
         <AskAI />
         <Projects />
         <Experience />
