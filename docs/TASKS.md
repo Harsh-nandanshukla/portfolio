@@ -33,7 +33,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] Card Spotlight hover on all tiles
 - [x] Guardrails tile: Border Beam, looping 6-stage pipeline chips, Number Ticker metrics
 - [x] Tech tags and Live Demo / API Docs / GitHub buttons
-- [ ] 🔍 Review
+- [x] 🔍 Review
 
 ## Phase 4 — Experience
 - [ ] Tracing Beam timeline with 3 entries and highlight metrics

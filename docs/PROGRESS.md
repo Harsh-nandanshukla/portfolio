@@ -16,8 +16,9 @@ Newest entry on top. Claude Code adds an entry at the end of every session or fi
 ### 2026-11-01 18:20 — Phase 3: benchmarks list on the featured tile
 **Done:** Added a "Benchmarks" list under the headline metrics on the featured tile, rendered from the existing `metrics` array in content.ts (prompt injection F1/FPR, Presidio P/R vs regex, Redis hit rate + latency, Toxic-BERT P/R/F1), small mono text (DECISIONS #46). Desktop tile height unchanged (fills the spare space); no horizontal scroll at 1280 / 900 / 360px. lint, tsc, build all exit 0.
 **Files changed:** src/components/projects/BenchmarksList.tsx (new), src/components/projects/ProjectTile.tsx, src/data/content.ts, docs/DECISIONS.md
-**Issues / notes:** 🔍 review still open.
-**Next:** Harsh reviews Phase 3 in the browser, then Phase 4 — Experience
+**Issues / notes:** none.
+**Review:** Reviewed and approved by Harsh (including the Benchmarks list).
+**Next:** Phase 4 — Experience
 
 ### 2026-11-01 18:01 — Phase 3: Projects bento grid
 **Done:** Projects section: heading (`sections.projects.label`) + intro from the new CONTENT.md "Projects section" (one-time exception). Bento grid from `content.projects`: 3 cols ≥1024px (featured 2 × 2, others stacked right), 2 cols at 768–1023px (featured full width, others side by side), 1 col on mobile (featured first); tiles fade up with the `<Reveal>` stagger. Every tile: mono date, title, subtitle, one-liner, mono tag pills, Live Demo (gradient) / API Docs (outline) buttons in a new tab with `noopener noreferrer` and names like "Live demo of AgentScope"; Card Spotlight glow + brighter border on hover (no scale). Featured tile: Border Beam, 6 pipeline chips lighting up in a loop (paused off-screen / hidden tab, all lit under reduced motion), and F1 / cache hit rate / Precision Number Tickers (1.2s, once). Installed via shadcn: Aceternity Bento Grid, Magic UI Border Beam + Number Ticker (all adapted, DECISIONS #40–#42); Card Spotlight rebuilt with motion instead of installing (#39). lint, tsc, build all exit 0.
