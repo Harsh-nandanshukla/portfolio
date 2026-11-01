@@ -13,6 +13,9 @@ Newest entry on top. Claude Code adds an entry at the end of every session or fi
 
 ---
 
+### 2026-11-01 17:02 — Phase 2 reopened
+Phase 2 reopened for particle intro revision; checkpoint 4988eec.
+
 ### 2026-11-01 16:58 — Phase 2 intro tuning + review
 **Done:** Root cause of "3D not visible": the dev server (started in Part A) served stale CSS without the new `--shadow-color` / `--sweep-light` tokens; `var(--shadow-color)` is the last item in the name's `text-shadow`, so the whole declaration was invalid (computed `none`) and the spark gradient broke too. Fixed by stopping the server, deleting `.next` and restarting; the production build was always correct. Then tuned the intro: (1) 3D: 11 extrusion layers (0.0065em × 0.008em each, ≈0.09em deep), shades 55% → 25% of `--text` into `--bg`, lit face gradient on an overlay, soft shadow kept, 8° resting tilt; (2) spiral at half angular speed: 1.25 → 0.9 turns, flight 0.85 → 1.2s (mobile 0.6 → 0.84s), measured 3.08s desktop / 2.23s mobile, caps raised to 3.2s / 2.4s; (3) letters start beyond the 4 corners round-robin with jitter, swirl lagged so they visibly enter from their corner; (4) spark: 6-letter band at full white with a cyan `--accent-1` bloom, 0.9s (0.7s mobile). Fade-ins use `translate` so they keep the tilt. DESIGN.md intro spec synced (Total, Start, Depth, Spark lines; one-time exception granted by Harsh). DECISIONS #31, #32. lint, tsc, build all exit 0.
 **Files changed:** src/components/NameIntro.tsx, src/app/globals.css, docs/DESIGN.md, docs/DECISIONS.md, docs/TASKS.md
