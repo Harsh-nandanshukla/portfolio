@@ -19,6 +19,8 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-jetbrains-mono);
   --font-heading: var(--font-geist-sans);
+  /* Display font for the hero name only (Orbitron 700) → font-display */
+  --font-display: var(--font-orbitron);
 
   /* Layout (DESIGN.md): max content width → max-w-content */
   --container-content: 1120px;

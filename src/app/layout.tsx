@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, JetBrains_Mono } from "next/font/google";
+import { Geist, JetBrains_Mono, Orbitron } from "next/font/google";
 import { content } from "@/data/content";
 import { InlineScript } from "@/components/InlineScript";
 import { introModeScript } from "@/lib/intro";
@@ -17,6 +17,13 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+// Orbitron 700 = the hero name only (DECISIONS #34), exposed as the `font-display` token
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
+  subsets: ["latin"],
+  weight: "700",
+});
+
 export const metadata: Metadata = {
   title: content.seo.title,
   description: content.seo.description,
@@ -26,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`dark ${geistSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`dark ${geistSans.variable} ${jetbrainsMono.variable} ${orbitron.variable} h-full antialiased`}
       // The inline script below sets data-intro on <html> before React hydrates.
       suppressHydrationWarning
     >

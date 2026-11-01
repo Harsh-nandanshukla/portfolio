@@ -26,9 +26,9 @@ Use the accent **sparingly**: buttons, metric numbers, glows, and active states 
 Most of the page is near-black and off-white.
 
 ### Typography
-- **Geist Sans** for headings and body. **JetBrains Mono** for metrics, tags, labels, and dates.
+- **Geist Sans** for headings and body. **JetBrains Mono** for metrics, tags, labels, and dates. **Orbitron 700** for the hero name only (`--font-display`).
 - Scale (desktop / mobile):
-  - Hero name: 72px / 44px, weight 600, tight letter-spacing (-0.03em)
+  - Hero name: Orbitron 700, fluid `clamp(36px, calc(12.8vw - 5px), 72px)` (36px at 320px wide → 72px from ~600px up), tight letter-spacing (-0.03em)
   - Section title: 40px / 30px, weight 600
   - Card title: 22px / 20px, weight 600
   - Body: 16px, line-height 1.6, `--text-muted`
@@ -63,17 +63,22 @@ Hidden while scrolling down, shown again while scrolling up. On mobile: name + m
   A static gradient replaces it on mobile or reduced-motion.
 - Small mono label above the name: `AI/ML ENGINEER · IIT JODHPUR`
 - Name: "Harsh Nandan Shukla"
-#### Name intro animation ("cyclone assemble")
-- Plays once per browser session on first load (sessionStorage, wrapped in try/catch). Total ≤ 3.2s desktop, ≤ 2.4s mobile.
-- The name is split into letter spans (letters aria-hidden; the h1 keeps aria-label with the full name so screen readers read it normally).
-- Start: letters are assigned round-robin to the 4 screen corners and begin off-screen beyond them (small jitter), at scale 0.2, opacity 0.
-- Motion: letters travel inward on a shrinking spiral (cyclone path, ~1–1.5 turns around the screen center) while growing from small to full size. Arrival is staggered ~60ms, so they lock into place one after another, left to right. Ease-out, no bounce or overshoot.
-- 3D solid look: perspective on the container; letters rotate in Y/X during flight and settle flat. Depth: ~11-layer extrusion offset down-right in mid-greys (mixed toward --bg), a lit face gradient, a soft shadow, and a slight resting tilt. Clearly 3D at rest. Tunable in INTRO_CONFIG (DECISIONS #26, #32).
+#### Name intro animation ("particle assemble")
+- Plays once per browser session on first load (sessionStorage, wrapped in try/catch), decided before first paint by a tiny inline script, so the name never flashes. Total ≤ 3.8s desktop, ≤ 2.8s mobile.
+- The name is split into letter spans (letters aria-hidden; the h1 keeps aria-label with the full name so screen readers read it normally). Letters sit in their final positions the whole time: zero layout shift.
+- Granules: ~2000 particles on desktop, ~600 on mobile (2.5–7px / 2–5px) of mixed shapes: 5-point stars, 4-point sparkles, crescent moons, dots, squares, triangles and diamonds, in white / --accent-1 / --accent-2. Drawn on one temporary full-screen canvas (devicePixelRatio ≤ 2), removed from the DOM after the intro.
+- Glitter: strong, fast twinkle; a share of particles flash bright white once mid-flight; soft glow on stars and sparkles.
+- Path: particles start off-screen beyond all 4 screen corners (round-robin, small jitter) and swirl inward on a shrinking spiral at a slow, trackable speed (~0.6 turns over ~1.5s desktop / ~1.1s mobile). Ease-out, no bounce or overshoot.
+- Assembly: landing points are sampled from each letter's real shape (the name drawn in its actual font, aligned to each letter span). Letters assemble left to right, staggered (~45ms desktop / ~30ms mobile).
+- Materialize: as each letter's particles settle, the solid 3D letter fades and scales in with a small shimmer while its particles are absorbed.
+- 3D solid look: ~11-layer extrusion offset down-right in mid-greys (mixed toward --bg), a lit face gradient, a soft shadow, and a slight resting tilt. Clearly 3D at rest. Tunable in INTRO_CONFIG (DECISIONS #26, #32).
 - Spark: a ~6-letter-wide band sweeps left to right (~900ms), holding letters at full white with a cyan glow, then they return to normal.
-- After the spark: the label and the tagline fade in, then the buttons.
-- Never blocking: the navbar is visible and usable from the start. Any click, key press, or scroll instantly finishes the animation (letters jump to final position).
-- Performance: animate only transform, opacity and filter. The neural background starts after the intro ends.
-- prefers-reduced-motion: no intro; the name appears static immediately.
+- After the spark: the label and the tagline fade in, then the buttons, then the neural background starts.
+- Never blocking: the navbar is visible and usable from the start. Any click, key press, wheel, touch or scroll (or a change in window width) instantly finishes the intro: particles vanish and letters snap to their final state.
+- Fallback: if the display font or the particle engine isn't ready within 800ms, the hero uses the normal subtle fade-in instead.
+- Performance: the particle engine loads only when the intro plays and never blocks first paint; particle positions depend only on time; slow devices automatically draw half the particles. DOM animations use only transform, opacity and filter.
+- prefers-reduced-motion: no intro; the name appears static immediately. Without JavaScript the name is visible.
+- All tunables (particle counts, shapes, sizes, colors, glitter, spiral, timings, extrusion, sweep) live in INTRO_CONFIG in NameIntro.tsx.
 - Tagline via Text Generate Effect: "Building production LLM systems — guardrails, RAG, and agent evaluation."
 - Buttons: **View Projects** (gradient, scrolls to projects) and **Download Resume** (outline).
 - Subtle scroll-down indicator at the bottom.

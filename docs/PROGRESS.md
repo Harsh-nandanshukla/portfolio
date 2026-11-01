@@ -13,6 +13,13 @@ Newest entry on top. Claude Code adds an entry at the end of every session or fi
 
 ---
 
+### 2026-11-01 17:35 — Phase 2 revision: particle intro + Orbitron
+**Done:** Replaced the letter-flight intro with a particle intro (`src/lib/particle-intro.ts`, lazy-loaded): ~2000 / 600 granules (2.5–7px / 2–5px; stars, sparkles, crescents, dots, squares, triangles, diamonds; white / cyan / violet) with strong twinkle, white mid-flight flashes and glow, swirling from all 4 corners at half the previous angular speed (0.6 turns, 1.5s / 1.1s flight), assembling each letter from its real font shape left to right; the solid 3D letter materializes (fade/scale + shimmer) as its particles are absorbed; then spark → label/tagline → buttons → background. Caps 3.8s / 2.8s (measured ≈3.48s / 2.59s). Hero name font = Orbitron 700 via `next/font` (`--font-display`), chosen from a temporary preview page (deleted). Fluid name size `clamp(36px, calc(12.8vw - 5px), 72px)` after 360/320px tests (was three lines at 360px); particles verified landing on the letters at 360px. CLAUDE.md fonts line and DESIGN.md (typography + intro spec, incl. the old "~1–1.5 turns") synced under Harsh's one-time exception. DECISIONS #33–#38. lint, tsc, build all exit 0.
+**Files changed:** src/lib/particle-intro.ts (new), src/components/NameIntro.tsx, src/app/layout.tsx, src/app/globals.css, CLAUDE.md, docs/DESIGN.md, docs/DECISIONS.md, docs/TASKS.md
+**Issues / notes:** Headless (no GPU) frame times at 2000 particles: ~13ms avg, ~28ms p95; lower `desktop.particles` if a real device stutters. Lighthouse LCP check deferred to Phase 8 (#38). Restart dev with a cleared `.next` if CSS/font changes don't show.
+**Review:** Reviewed and approved by Harsh.
+**Next:** Phase 3 — Projects
+
 ### 2026-11-01 17:02 — Phase 2 reopened
 Phase 2 reopened for particle intro revision; checkpoint 4988eec.
 

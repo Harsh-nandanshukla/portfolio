@@ -21,7 +21,7 @@ plain sentences, and give exact commands for Windows PowerShell.
 - Framer Motion (`motion` package)
 - Aceternity UI + Magic UI components (copy-in components, installed via the shadcn CLI where supported)
 - shadcn/ui for base primitives
-- Fonts via `next/font`: Geist (text), JetBrains Mono (metrics/labels)
+- Fonts via `next/font`: Orbitron 700 (hero name only, --font-display), Geist (text), JetBrains Mono (metrics/labels)
 - Deploy: Vercel
 
 Do not add other UI libraries, CSS frameworks, or state managers without asking.
