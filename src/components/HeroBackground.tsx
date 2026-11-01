@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
  *   so its code never delays the first paint.
  * - Mobile or reduced motion: no canvas, a static gradient glow from the design tokens.
  * The glow is hidden by CSS on desktop-with-motion from the very first paint, so it never flashes.
+ * During the name intro, [data-hero-bg] keeps the glow hidden; the canvas waits for the intro too.
  */
 
 const NeuralBackground = dynamic(() => import("@/components/NeuralBackground"), { ssr: false });
@@ -34,7 +35,7 @@ export function HeroBackground() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,black_75%,transparent)]"
     >
-      <div className="hero-glow absolute inset-0 md:motion-safe:hidden" />
+      <div data-hero-bg="" className="hero-glow absolute inset-0 md:motion-safe:hidden" />
       {showCanvas && <NeuralBackground />}
     </div>
   );

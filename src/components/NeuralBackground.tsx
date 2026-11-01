@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { whenIntroDone } from "@/lib/intro";
 
 /*
  * Hero neural-network canvas (DESIGN.md §2).
@@ -10,6 +11,7 @@ import { cn } from "@/lib/utils";
  * Colors are read at runtime from the --accent-1 / --accent-2 design tokens.
  * Pauses when the hero is off-screen and when the tab is hidden.
  * Only mounted on desktop without reduced motion (see HeroBackground.tsx).
+ * Starts only after the hero name intro has finished.
  */
 
 const CONFIG = {
@@ -78,6 +80,7 @@ export default function NeuralBackground({ className }: { className?: string }) 
     let nodes: Node[] = [];
     let cursor: { x: number; y: number } | null = null;
 
+    let introDone = false;
     let inView = true;
     let tabVisible = document.visibilityState === "visible";
     let frame = 0;
@@ -176,7 +179,7 @@ export default function NeuralBackground({ className }: { className?: string }) 
 
     const running = () => frame !== 0;
     const start = () => {
-      if (running() || !inView || !tabVisible) return;
+      if (running() || !introDone || !inView || !tabVisible) return;
       last = 0;
       frame = requestAnimationFrame(step);
     };
@@ -184,7 +187,7 @@ export default function NeuralBackground({ className }: { className?: string }) 
       cancelAnimationFrame(frame);
       frame = 0;
     };
-    const update = () => (inView && tabVisible ? start() : stop());
+    const update = () => (introDone && inView && tabVisible ? start() : stop());
 
     // ---- Observers / listeners ----
     const resizeObserver = new ResizeObserver(resize);
@@ -216,11 +219,15 @@ export default function NeuralBackground({ className }: { className?: string }) 
     document.documentElement.addEventListener("pointerleave", onPointerLeave);
 
     resize();
-    update();
-    // Fade the canvas in (CSS transition on opacity, see className below).
-    canvas.dataset.ready = "";
+    const offIntro = whenIntroDone(() => {
+      introDone = true;
+      // Fade the canvas in (CSS transition on opacity, see className below).
+      canvas.dataset.ready = "";
+      update();
+    });
 
     return () => {
+      offIntro();
       stop();
       resizeObserver.disconnect();
       intersectionObserver.disconnect();

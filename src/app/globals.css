@@ -145,6 +145,9 @@
   --accent-1: #22D3EE;
   --accent-2: #8B5CF6;
   --gradient: linear-gradient(90deg, #22D3EE, #8B5CF6);
+  /* Hero name intro (DECISIONS #27): soft shadow under the extruded name, and the spark's light end */
+  --shadow-color: rgb(0 0 0 / 0.6);
+  --sweep-light: #FFFFFF;
 }
 
 /* Point shadcn's semantic colors at the design tokens so shadcn components match */
@@ -181,6 +184,63 @@
   html {
     @apply font-sans;
   }
+}
+
+/* Hero name intro spark: white → --accent-1 text */
+@utility text-sweep {
+  background-image: linear-gradient(90deg, var(--sweep-light), var(--accent-1));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Hero name intro sequence (states documented in src/lib/intro.ts) ----------
+   "play" is set before first paint, so the letters and the rest of the hero never flash.
+   Without JavaScript there is no data-intro attribute and everything stays visible. */
+html[data-intro="play"] [data-intro-letter],
+html[data-intro="play"] [data-hero-fade],
+html[data-intro="running"] [data-hero-fade],
+html[data-intro="play"] [data-hero-bg],
+html[data-intro="running"] [data-hero-bg] {
+  opacity: 0;
+}
+
+@keyframes hero-fade-up-skip {
+  from {
+    opacity: 0;
+    transform: translateY(var(--fade-rise-skip, 16px));
+  }
+}
+@keyframes hero-fade-up-after {
+  from {
+    opacity: 0;
+    transform: translateY(var(--fade-rise-after, 16px));
+  }
+}
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Later loads in the same session: normal subtle fade-in */
+  html[data-intro="skip"] :is([data-hero-fade], [data-hero-name]) {
+    animation: hero-fade-up-skip var(--fade-duration-skip, 0.5s) ease-out var(--fade-delay-skip, 0s) both;
+  }
+  /* After the intro (or a skip): label + tagline, then buttons, then the scroll hint */
+  html[data-intro="done"] [data-hero-fade] {
+    animation: hero-fade-up-after var(--fade-duration-after, 0.5s) ease-out var(--fade-delay-after, 0s) both;
+  }
+  html[data-intro="done"] [data-hero-bg] {
+    animation: hero-fade 1s ease-out both;
+  }
+}
+
+/* No JavaScript: the tagline words are visible */
+html:not([data-intro]) [data-text-generate] span {
+  opacity: 1 !important;
+  filter: none !important;
 }
 
 /* Smooth anchor scrolling only for users who haven't asked for reduced motion */

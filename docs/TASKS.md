@@ -23,6 +23,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] `NeuralBackground.tsx` canvas: drifting nodes, connections, cursor interaction, paused off-screen
 - [x] Static gradient fallback for mobile / reduced motion
 - [x] Label, name, Text Generate Effect tagline, two CTAs, scroll indicator
+- [x] Name intro ("cyclone assemble"): once per session, skippable, no flash, reduced-motion safe
 - [ ] 🔍 Review on desktop + mobile
 
 ## Phase 3 — Projects (bento)
