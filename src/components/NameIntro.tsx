@@ -17,20 +17,24 @@ import {
  * ==================================================================================== */
 export const INTRO_CONFIG = {
   /** Per-device timing. Total = (letters − 1) × stagger + flight + sweep. */
-  desktop: { flightS: 0.85, staggerS: 0.06, sweepS: 0.6 }, // ≈ 2.41s for 17 letters (limit 2.5s)
-  mobile: { flightS: 0.6, staggerS: 0.04, sweepS: 0.45 }, // ≈ 1.69s for 17 letters (limit 1.8s)
+  desktop: { flightS: 1.2, staggerS: 0.06, sweepS: 0.9 }, // ≈ 3.06s for 17 letters (limit 3.2s)
+  mobile: { flightS: 0.84, staggerS: 0.04, sweepS: 0.7 }, // ≈ 2.18s for 17 letters (limit 2.4s)
   /** Which timing set to use. Matches Tailwind's md breakpoint (768px). */
   mobileQuery: "(max-width: 767px)",
-  /** Limits from DESIGN.md; a dev-only console warning fires if the timing above exceeds them. */
-  maxTotalS: { desktop: 2.5, mobile: 1.8 },
+  /** Caps (DECISIONS #31); a dev-only console warning fires if the timing above exceeds them. */
+  maxTotalS: { desktop: 3.2, mobile: 2.4 },
 
-  /* ---- Cyclone path ---- */
+  /* ---- Cyclone path: from the 4 corners, spiralling inward ---- */
   /** Turns around the screen center during the flight (each letter lands within ±0.5 turn of this). */
-  spiralTurns: 1.25,
-  /** Start radius, as a multiple of half the screen diagonal (> 1 = starts off-screen). */
-  startRadius: 1.15,
-  /** Angle of the first letter's start point (−135° = top-left corner); the rest spread around the circle. */
-  startAngleDeg: -135,
+  spiralTurns: 0.9,
+  /** Start distance, as a multiple of half the screen diagonal (> 1 = beyond the corner, off-screen). */
+  startRadius: 1.12,
+  /** Random angle jitter per letter so letters from the same corner don't overlap. */
+  cornerJitterDeg: 5,
+  /** Extra start distance, 0 to this share of the start radius (outward only, so letters stay off-screen). */
+  radiusJitter: 0.1,
+  /** > 1 delays the swirl so letters visibly enter from their corner before spiralling (1 = no lag). */
+  angleLagPower: 1.5,
   /** Ease-out strength (3 = cubic). No overshoot at any value. */
   easePower: 3,
   /** Points sampled along the spiral (more = smoother curve). */
@@ -44,25 +48,39 @@ export const INTRO_CONFIG = {
   startRotateXDeg: 55,
   startRotateYDeg: 110,
   perspectivePx: 900,
+  /** Slight resting tilt of the whole name (top leans back), using perspectivePx. 0 = none. */
+  restTiltXDeg: 8,
 
-  /* ---- Spark sweep (white → --accent-1), after the last letter lands ---- */
-  /** How long each letter's flash lasts, as a share of sweepS. */
-  sweepFlashPortion: 0.4,
-  /** Letter brightness at the peak of its flash. */
-  sweepBrightness: 1.6,
+  /* ---- Spark sweep, after the last letter lands ---- */
+  /** Width of the bright band, in letters (how many letters glow at once). */
+  sweepBandLetters: 6,
+  /** Each letter's flash: fades up until the first offset, holds full white until the second, then fades out. */
+  sweepHold: [0.25, 0.55],
+  /** Letter brightness at the peak of its flash (also lifts the extrusion). */
+  sweepBrightness: 1.3,
+  /** Cyan bloom around each letter as the band passes: text-shadow blur radii in em, color --accent-1. */
+  sweepGlowEm: [0.06, 0.2, 0.5],
 
   /* ---- 3D extrusion (always on, also at rest) ---- */
   extrusion: {
     /** Number of stacked depth layers. */
-    layers: 9,
+    layers: 11,
     /** Offset per layer, in em (scales with the font size: 72px desktop / 44px mobile). Down-right. */
-    offsetXEm: 0.011,
-    offsetYEm: 0.013,
-    /** Layer shade = % of --text mixed into --bg. First layer → last layer (darker). */
-    shadeFromPct: 58,
-    shadeToPct: 22,
+    offsetXEm: 0.0065,
+    offsetYEm: 0.008,
+    /** Layer shade = % of --text mixed into --bg, front layer → back layer. Stays mid-grey, well above --bg. */
+    shadeFromPct: 55,
+    shadeToPct: 25,
     /** Soft shadow under the extruded name (color = --shadow-color token). */
     shadow: { offsetXEm: 0.06, offsetYEm: 0.16, blurEm: 0.22 },
+  },
+
+  /* ---- Lit letter face: vertical gradient, lighter top → slightly darker bottom ---- */
+  face: {
+    /** Top color = --text mixed with this % of --sweep-light (white). */
+    topLightPct: 60,
+    /** Bottom color = --text mixed with this % of --bg. */
+    bottomDarkPct: 15,
   },
 
   /* ---- What follows the intro: label + tagline, then buttons, then the scroll hint ---- */
@@ -107,6 +125,33 @@ function buildExtrusion(): string {
 
 const EXTRUSION = buildExtrusion();
 
+/** Lit front face, painted on an overlay (text-shadow would otherwise cover a background-clip:text face). */
+const FACE_STYLE: CSSProperties = {
+  backgroundImage: `linear-gradient(to bottom, color-mix(in oklab, var(--text), var(--sweep-light) ${INTRO_CONFIG.face.topLightPct}%), color-mix(in oklab, var(--text), var(--bg) ${INTRO_CONFIG.face.bottomDarkPct}%))`,
+  WebkitBackgroundClip: "text",
+  backgroundClip: "text",
+  color: "transparent",
+  textShadow: "none",
+};
+
+/** Spark overlay: full white with a cyan bloom. Only its opacity is animated. */
+const SWEEP_STYLE: CSSProperties = {
+  color: "var(--sweep-light)",
+  textShadow: INTRO_CONFIG.sweepGlowEm.map((r) => `0 0 ${r}em var(--accent-1)`).join(", "),
+};
+
+const restTiltXDeg: number = INTRO_CONFIG.restTiltXDeg; // plain number so "0 = none" can be checked
+const REST_TILT =
+  restTiltXDeg === 0 ? undefined : `perspective(${INTRO_CONFIG.perspectivePx}px) rotateX(${restTiltXDeg}deg)`;
+
+/** Screen corners in round-robin order: top-left, top-right, bottom-right, bottom-left. */
+const CORNERS: ReadonlyArray<readonly [number, number]> = [
+  [-1, -1],
+  [1, -1],
+  [1, 1],
+  [-1, 1],
+];
+
 // ---------- Intro state hook ----------
 
 /** Current intro mode; "play" during server render and hydration. */
@@ -129,11 +174,14 @@ function buildAnimations(letters: HTMLElement[], timing: Timing): Animation[] {
   const cfg = INTRO_CONFIG;
   const vw = window.innerWidth;
   const vh = window.innerHeight;
-  const startR = (Math.hypot(vw, vh) / 2) * cfg.startRadius;
+  const halfDiag = Math.hypot(vw, vh) / 2;
   const n = letters.length;
   const landS = (n - 1) * timing.staggerS + timing.flightS;
-  const flashS = timing.sweepS * cfg.sweepFlashPortion;
+  // Sweep: `sweepBandLetters` letters glow at once; the last flash ends exactly at landS + sweepS.
+  const sweepStep = timing.sweepS / (n - 1 + cfg.sweepBandLetters);
+  const flashS = sweepStep * cfg.sweepBandLetters;
   const baseTurn = cfg.spiralTurns * TAU;
+  const jitter = (cfg.cornerJitterDeg * Math.PI) / 180;
   const anims: Animation[] = [];
 
   letters.forEach((el, i) => {
@@ -144,8 +192,11 @@ function buildAnimations(letters: HTMLElement[], timing: Timing): Animation[] {
     const endR = Math.hypot(fx, fy);
     const endAngle = Math.atan2(fy, fx);
 
-    // Start: spread by index around a big circle (edges and corners). Spin ≈ spiralTurns and land exactly on endAngle.
-    const startAngle = (cfg.startAngleDeg * Math.PI) / 180 + (i / n) * TAU;
+    // Start: beyond one of the 4 corners (round-robin), with a little random jitter.
+    // Spin ≈ spiralTurns and land exactly on endAngle.
+    const [cornerX, cornerY] = CORNERS[i % CORNERS.length];
+    const startAngle = Math.atan2(cornerY * vh, cornerX * vw) + (Math.random() * 2 - 1) * jitter;
+    const startR = halfDiag * cfg.startRadius * (1 + Math.random() * cfg.radiusJitter);
     const spin = baseTurn + wrapAngle(endAngle - (startAngle + baseTurn));
     const rotY = cfg.startRotateYDeg * (i % 2 === 0 ? 1 : -1);
 
@@ -158,7 +209,7 @@ function buildAnimations(letters: HTMLElement[], timing: Timing): Animation[] {
         break;
       }
       const p = 1 - Math.pow(1 - t, cfg.easePower); // ease-out progress along the path
-      const angle = startAngle + spin * p;
+      const angle = startAngle + spin * Math.pow(p, cfg.angleLagPower); // swirl lags: letters enter from their corner
       const r = startR + (endR - startR) * p;
       const x = r * Math.cos(angle) - fx;
       const y = r * Math.sin(angle) - fy;
@@ -183,18 +234,31 @@ function buildAnimations(letters: HTMLElement[], timing: Timing): Animation[] {
     // Spark: after the last letter lands, a flash passes left → right.
     const flash: KeyframeAnimationOptions = {
       duration: flashS * 1000,
-      delay: (landS + (n > 1 ? i / (n - 1) : 0) * (timing.sweepS - flashS)) * 1000,
-      easing: "ease-out",
+      delay: (landS + i * sweepStep) * 1000,
+      easing: "linear",
     };
+    const [holdFrom, holdTo] = cfg.sweepHold;
     const overlay = el.querySelector<HTMLElement>("[data-intro-sweep]");
     if (overlay) {
-      anims.push(overlay.animate([{ opacity: 0 }, { opacity: 1, offset: 0.35 }, { opacity: 0 }], flash));
+      anims.push(
+        overlay.animate(
+          [
+            { opacity: 0, easing: "ease-out" },
+            { opacity: 1, offset: holdFrom },
+            { opacity: 1, offset: holdTo, easing: "ease-in" },
+            { opacity: 0 },
+          ],
+          flash,
+        ),
+      );
     }
+    const bright = `brightness(${cfg.sweepBrightness})`;
     anims.push(
       el.animate(
         [
-          { filter: "brightness(1)" },
-          { filter: `brightness(${cfg.sweepBrightness})`, offset: 0.35 },
+          { filter: "brightness(1)", easing: "ease-out" },
+          { filter: bright, offset: holdFrom },
+          { filter: bright, offset: holdTo, easing: "ease-in" },
           { filter: "brightness(1)" },
         ],
         flash,
@@ -342,7 +406,7 @@ export function NameIntro({ name, label, tagline, actions, scrollHint }: NameInt
         aria-label={name}
         data-hero-name=""
         className="mt-5 text-[44px] leading-[1.1] font-semibold tracking-[-0.03em] text-balance text-text md:text-[72px]"
-        style={{ textShadow: EXTRUSION, ...fadeVars(1, 0) }}
+        style={{ textShadow: EXTRUSION, transform: REST_TILT, ...fadeVars(1, 0) }}
       >
         {words.map((word, w) => (
           <Fragment key={w}>
@@ -351,9 +415,13 @@ export function NameIntro({ name, label, tagline, actions, scrollHint }: NameInt
               {Array.from(word).map((char, c) => (
                 <span key={c} data-intro-letter="" className="relative inline-block">
                   {char}
+                  <span className="pointer-events-none absolute inset-0" style={FACE_STYLE}>
+                    {char}
+                  </span>
                   <span
                     data-intro-sweep=""
-                    className="text-sweep pointer-events-none absolute inset-0 opacity-0 [text-shadow:none]"
+                    className="pointer-events-none absolute inset-0 opacity-0"
+                    style={SWEEP_STYLE}
                   >
                     {char}
                   </span>

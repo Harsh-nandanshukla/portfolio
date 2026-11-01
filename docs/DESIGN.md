@@ -64,12 +64,12 @@ Hidden while scrolling down, shown again while scrolling up. On mobile: name + m
 - Small mono label above the name: `AI/ML ENGINEER · IIT JODHPUR`
 - Name: "Harsh Nandan Shukla"
 #### Name intro animation ("cyclone assemble")
-- Plays once per browser session on first load (sessionStorage, wrapped in try/catch). Total ≤ 2.5s desktop, ≤ 1.8s mobile.
+- Plays once per browser session on first load (sessionStorage, wrapped in try/catch). Total ≤ 3.2s desktop, ≤ 2.4s mobile.
 - The name is split into letter spans (letters aria-hidden; the h1 keeps aria-label with the full name so screen readers read it normally).
-- Start: each letter begins off-screen, spread around the screen edges and corners (positions distributed by index on a large circle), at scale 0.2, opacity 0.
+- Start: letters are assigned round-robin to the 4 screen corners and begin off-screen beyond them (small jitter), at scale 0.2, opacity 0.
 - Motion: letters travel inward on a shrinking spiral (cyclone path, ~1–1.5 turns around the screen center) while growing from small to full size. Arrival is staggered ~60ms, so they lock into place one after another, left to right. Ease-out, no bounce or overshoot.
-- 3D solid look: perspective on the container; letters rotate in Y/X during flight and settle flat. Depth via a stacked text-shadow extrusion (5–6 layers in darker shades of --text), kept subtle in the resting state.
-- Spark: once the last letter lands, a narrow light sweep (white → --accent-1) passes left to right across the name in ~600ms. Each letter briefly brightens as the sweep passes, then returns to normal brightness.
+- 3D solid look: perspective on the container; letters rotate in Y/X during flight and settle flat. Depth: ~11-layer extrusion offset down-right in mid-greys (mixed toward --bg), a lit face gradient, a soft shadow, and a slight resting tilt. Clearly 3D at rest. Tunable in INTRO_CONFIG (DECISIONS #26, #32).
+- Spark: a ~6-letter-wide band sweeps left to right (~900ms), holding letters at full white with a cyan glow, then they return to normal.
 - After the spark: the label and the tagline fade in, then the buttons.
 - Never blocking: the navbar is visible and usable from the start. Any click, key press, or scroll instantly finishes the animation (letters jump to final position).
 - Performance: animate only transform, opacity and filter. The neural background starts after the intro ends.

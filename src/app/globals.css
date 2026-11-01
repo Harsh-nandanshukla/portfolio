@@ -186,13 +186,6 @@
   }
 }
 
-/* Hero name intro spark: white → --accent-1 text */
-@utility text-sweep {
-  background-image: linear-gradient(90deg, var(--sweep-light), var(--accent-1));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
 
 /* ---------- Hero name intro sequence (states documented in src/lib/intro.ts) ----------
    "play" is set before first paint, so the letters and the rest of the hero never flash.
@@ -208,13 +201,13 @@ html[data-intro="running"] [data-hero-bg] {
 @keyframes hero-fade-up-skip {
   from {
     opacity: 0;
-    transform: translateY(var(--fade-rise-skip, 16px));
+    translate: 0 var(--fade-rise-skip, 16px); /* `translate`, not `transform`: keeps the name's resting tilt */
   }
 }
 @keyframes hero-fade-up-after {
   from {
     opacity: 0;
-    transform: translateY(var(--fade-rise-after, 16px));
+    translate: 0 var(--fade-rise-after, 16px);
   }
 }
 @keyframes hero-fade {
