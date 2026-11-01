@@ -20,6 +20,9 @@
   --font-mono: var(--font-jetbrains-mono);
   --font-heading: var(--font-geist-sans);
 
+  /* Layout (DESIGN.md): max content width → max-w-content */
+  --container-content: 1120px;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -177,5 +180,13 @@
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+}
+
+/* <Reveal> content is fully visible and still under reduced motion, even before JS loads */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

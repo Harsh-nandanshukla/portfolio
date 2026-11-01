@@ -1,15 +1,25 @@
-import { content } from "@/data/content";
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/sections/Hero";
+import { AskAI } from "@/components/sections/AskAI";
+import { Projects } from "@/components/sections/Projects";
+import { Experience } from "@/components/sections/Experience";
+import { Skills } from "@/components/sections/Skills";
+import { Contact } from "@/components/sections/Contact";
 
-// Phase 0 placeholder: verifies fonts and color tokens only.
+// Layout (DESIGN.md): max width 1120px, side padding 16px / 24px (md+),
+// section spacing 80px / 128px (md+). md = 768px.
 export default function Home() {
-  const { name, label } = content.identity;
-
   return (
-    <main className="flex min-h-screen flex-1 flex-col items-center justify-center gap-4 bg-bg px-4 text-center">
-      <p className="font-mono text-[13px] uppercase tracking-[0.08em] text-text-muted">{label}</p>
-      <h1 className="font-sans text-[44px] font-semibold tracking-[-0.03em] text-text md:text-[72px]">
-        {name}
-      </h1>
-    </main>
+    <>
+      <Navbar />
+      <main className="mx-auto flex w-full max-w-content flex-1 flex-col gap-20 px-4 pb-20 md:gap-32 md:px-6 md:pb-32">
+        <Hero />
+        <AskAI />
+        <Projects />
+        <Experience />
+        <Skills />
+        <Contact />
+      </main>
+    </>
   );
 }

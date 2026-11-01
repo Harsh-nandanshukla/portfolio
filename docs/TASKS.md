@@ -14,9 +14,9 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] 🔍 Review: blank dark page with the correct fonts running at localhost:3000
 
 ## Phase 1 — Skeleton
-- [ ] Page structure with an empty `<section id>` for every section
-- [ ] Floating glass navbar with smooth scroll and hide-on-scroll-down
-- [ ] Reusable `<Reveal>` wrapper (fade-up on scroll, reduced-motion aware)
+- [x] Page structure with an empty `<section id>` for every section
+- [x] Floating glass navbar with smooth scroll and hide-on-scroll-down
+- [x] Reusable `<Reveal>` wrapper (fade-up on scroll, reduced-motion aware)
 - [ ] 🔍 Review: navbar works and scrolls to each section
 
 ## Phase 2 — Hero

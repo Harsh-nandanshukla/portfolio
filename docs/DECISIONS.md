@@ -19,5 +19,9 @@ Choices made, so they don't get reopened every session. Add new ones at the bott
 | 13 | Design tokens live in `globals.css` `@theme inline` (Tailwind v4 has no tailwind.config); shadcn's dark colors point at the design tokens; one shared `--border` | Single source for colors; shadcn components match the design | 2026-10-31 |
 | 14 | Keep shadcn's generated `cn()` (re-exports the official `cn` package) instead of hand-writing clsx + tailwind-merge | It is shadcn's own drop-in replacement; same API | 2026-10-31 |
 | 15 | Hero name "cyclone assemble" intro with 3D extrusion + spark sweep | Memorable first impression; constrained to ≤2.5s, skippable, once per session, reduced-motion safe so recruiters aren't blocked | 2026-11-01 |
+| 16 | Mobile breakpoint = Tailwind `md` (768px): below it the navbar shows name + menu icon | Tailwind default, no custom config; matches the 768px check in Phase 8 | 2026-11-01 |
+| 17 | Scroll direction via Motion `useScroll` + `useMotionValueEvent` (compare with previous position, 6px dead zone, always shown in the top 64px); kept visible during nav-link jumps and while the mobile menu is open | No extra library; dead zone stops flicker; navbar doesn't vanish right after a click | 2026-11-01 |
+| 18 | Nav and section names/ids live in content.ts (`nav`, `sections`, `ui`); nav hrefs are built from section ids | One place to add a section or link; ids can't drift from the nav | 2026-11-01 |
+| 19 | Smooth scroll via `scrollIntoView` in the navbar (`instant` under reduced motion) plus focus on the target section (`tabIndex={-1}`) | Same behavior in every browser; keyboard and screen-reader users land in the right place | 2026-11-01 |
 ## Template
 | # | Decision | Why | Date |

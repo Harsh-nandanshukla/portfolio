@@ -101,8 +101,44 @@ export interface Seo {
   };
 }
 
+/** One page section: its anchor id and its name (shown in the Phase 1 placeholders). */
+export interface SectionMeta {
+  id: string;
+  label: string;
+}
+
+export interface Sections {
+  hero: SectionMeta;
+  askAi: SectionMeta;
+  projects: SectionMeta;
+  experience: SectionMeta;
+  skills: SectionMeta;
+  contact: SectionMeta;
+}
+
+/**
+ * A navbar entry. "section" = scrolls to an anchor on the page.
+ * "resume" = the gradient Resume button (opens the PDF).
+ */
+export interface NavItem {
+  kind: "section" | "resume";
+  label: string;
+  href: string;
+}
+
+/** Small interface strings (screen-reader labels etc.). */
+export interface UiStrings {
+  navAriaLabel: string;
+  openMenu: string;
+  closeMenu: string;
+}
+
 export interface SiteContent {
   identity: Identity;
+  sections: Sections;
+  /** Navbar entries, in display order. Add one object to add a link. */
+  nav: NavItem[];
+  ui: UiStrings;
   education: Education;
   projects: Project[];
   experience: ExperienceEntry[];
@@ -115,17 +151,46 @@ export interface SiteContent {
 
 // ---------- Content ----------
 
+const identity: Identity = {
+  name: "Harsh Nandan Shukla",
+  label: "AI/ML Engineer · IIT Jodhpur",
+  tagline: "Building production LLM systems — guardrails, RAG, and agent evaluation.",
+  shortBio:
+    "Final-year B.Tech student at IIT Jodhpur (Materials & Metallurgical Engineering, Minor in AI) who builds and deploys LLM systems end to end, from guardrail pipelines and RAG chatbots to agent-evaluation platforms, self-hosted on Oracle Cloud.",
+  email: "shuklaharshnandan@gmail.com",
+  github: "https://github.com/Harsh-nandanshukla",
+  linkedin: "https://www.linkedin.com/in/harsh-shukla-a87b0a2b0/",
+  // TODO: place resume.pdf in public/ (the Resume button 404s until then)
+  resume: "/resume.pdf",
+};
+
+// Section names come from DESIGN.md "Sections"; ids are the page anchors.
+const sections: Sections = {
+  hero: { id: "home", label: "Hero" },
+  askAi: { id: "ask-ai", label: "Ask my AI" },
+  projects: { id: "projects", label: "Projects" },
+  experience: { id: "experience", label: "Experience & Research" },
+  skills: { id: "skills", label: "Skills" },
+  contact: { id: "contact", label: "Contact" },
+};
+
 export const content: SiteContent = {
-  identity: {
-    name: "Harsh Nandan Shukla",
-    label: "AI/ML Engineer · IIT Jodhpur",
-    tagline: "Building production LLM systems — guardrails, RAG, and agent evaluation.",
-    shortBio:
-      "Final-year B.Tech student at IIT Jodhpur (Materials & Metallurgical Engineering, Minor in AI) who builds and deploys LLM systems end to end, from guardrail pipelines and RAG chatbots to agent-evaluation platforms, self-hosted on Oracle Cloud.",
-    email: "shuklaharshnandan@gmail.com",
-    github: "https://github.com/Harsh-nandanshukla",
-    linkedin: "https://www.linkedin.com/in/harsh-shukla-a87b0a2b0/",
-    resume: "/resume.pdf",
+  identity,
+  sections,
+
+  // Labels from DESIGN.md §1 Navbar: Projects · Experience · Skills · Contact + "Resume".
+  nav: [
+    { kind: "section", label: "Projects", href: `#${sections.projects.id}` },
+    { kind: "section", label: "Experience", href: `#${sections.experience.id}` },
+    { kind: "section", label: "Skills", href: `#${sections.skills.id}` },
+    { kind: "section", label: "Contact", href: `#${sections.contact.id}` },
+    { kind: "resume", label: "Resume", href: identity.resume },
+  ],
+
+  ui: {
+    navAriaLabel: "Main",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
   },
 
   education: {
