@@ -151,6 +151,8 @@ export interface ProjectsSectionStrings {
   /** Screen-reader labels for the featured tile's pipeline and metrics. */
   pipelineAriaLabel: string;
   metricsAriaLabel: string;
+  /** Heading above the featured tile's full metrics list (project.metrics). */
+  benchmarksHeading: string;
   tagsAriaLabel: string;
 }
 
@@ -224,6 +226,7 @@ export const content: SiteContent = {
     ],
     pipelineAriaLabel: "Safety pipeline stages",
     metricsAriaLabel: "Headline metrics",
+    benchmarksHeading: "Benchmarks",
     tagsAriaLabel: "Tech stack",
   },
 

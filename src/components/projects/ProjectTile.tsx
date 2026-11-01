@@ -4,12 +4,13 @@ import { CardSpotlight } from "@/components/ui/card-spotlight";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { PipelineChips } from "@/components/projects/PipelineChips";
 import { MetricsRow } from "@/components/projects/MetricsRow";
+import { BenchmarksList } from "@/components/projects/BenchmarksList";
 import { cn } from "@/lib/utils";
 
 /*
  * One bento tile (DESIGN.md §4). Everything comes from the project object:
  * date, title, subtitle, one-liner, tags, and link buttons (a "TODO" or empty link hides its button).
- * Featured tiles also get the Border Beam, the pipeline chips and the headline metrics, when the data has them.
+ * Featured tiles also get the Border Beam, the pipeline chips, the headline metrics and the benchmarks list, when the data has them.
  */
 
 const focusRing =
@@ -20,7 +21,8 @@ function hasLink(href: string) {
 }
 
 export function ProjectTile({ project }: { project: Project }) {
-  const { linkButtons, pipelineAriaLabel, metricsAriaLabel, tagsAriaLabel } = content.projectsSection;
+  const { linkButtons, pipelineAriaLabel, metricsAriaLabel, benchmarksHeading, tagsAriaLabel } =
+    content.projectsSection;
   const featured = project.featured;
   const buttons = linkButtons.filter((b) => hasLink(project.links[b.key]));
 
@@ -50,6 +52,9 @@ export function ProjectTile({ project }: { project: Project }) {
           )}
           {project.headlineMetrics && project.headlineMetrics.length > 0 && (
             <MetricsRow metrics={project.headlineMetrics} ariaLabel={metricsAriaLabel} />
+          )}
+          {project.metrics && project.metrics.length > 0 && (
+            <BenchmarksList metrics={project.metrics} heading={benchmarksHeading} />
           )}
         </div>
       )}
