@@ -257,3 +257,36 @@ html:not([data-intro]) [data-text-generate] span {
     filter: none !important;
   }
 }
+/* ---------- Border Beam (featured project tile; src/components/ui/border-beam.tsx) ----------
+   A conic "comet" spins behind a mask that only lets the border ring through.
+   Only `rotate` animates. Container units size the comet to cover any tile shape. */
+.border-beam {
+  container-type: size;
+  padding: var(--beam-width, 1px);
+  overflow: hidden;
+  mask:
+    linear-gradient(black, black) content-box,
+    linear-gradient(black, black);
+  mask-composite: exclude;
+}
+.border-beam-comet {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(100cqw + 100cqh);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  background-image: conic-gradient(
+    from 0deg,
+    transparent 0deg 250deg,
+    color-mix(in oklab, var(--accent-2) 70%, transparent) 310deg,
+    var(--accent-1) 352deg,
+    transparent 360deg
+  );
+  animation: border-beam-spin var(--beam-duration, 8s) linear infinite;
+}
+@keyframes border-beam-spin {
+  to {
+    rotate: 360deg;
+  }
+}

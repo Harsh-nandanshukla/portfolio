@@ -29,10 +29,10 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] 🔍 Review particle intro
 
 ## Phase 3 — Projects (bento)
-- [ ] Bento Grid layout (featured 2×2 tile, two medium tiles; single column on mobile)
-- [ ] Card Spotlight hover on all tiles
-- [ ] Guardrails tile: Border Beam, looping 6-stage pipeline chips, Number Ticker metrics
-- [ ] Tech tags and Live Demo / API Docs / GitHub buttons
+- [x] Bento Grid layout (featured 2×2 tile, two medium tiles; single column on mobile)
+- [x] Card Spotlight hover on all tiles
+- [x] Guardrails tile: Border Beam, looping 6-stage pipeline chips, Number Ticker metrics
+- [x] Tech tags and Live Demo / API Docs / GitHub buttons
 - [ ] 🔍 Review
 
 ## Phase 4 — Experience

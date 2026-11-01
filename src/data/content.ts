@@ -136,6 +136,24 @@ export interface HeroStrings {
   scrollHint: string;
 }
 
+/** One link button on a project tile. Buttons render in this order; a "TODO" link hides its button. */
+export interface ProjectLinkButton {
+  key: keyof ProjectLinks;
+  label: string;
+  /** Accessible name; "{project}" is replaced with the project title. */
+  ariaLabel: string;
+}
+
+/** Projects section strings (CONTENT.md "Projects section"). The heading is sections.projects.label. */
+export interface ProjectsSectionStrings {
+  intro: string;
+  linkButtons: ProjectLinkButton[];
+  /** Screen-reader labels for the featured tile's pipeline and metrics. */
+  pipelineAriaLabel: string;
+  metricsAriaLabel: string;
+  tagsAriaLabel: string;
+}
+
 /** Small interface strings (screen-reader labels etc.). */
 export interface UiStrings {
   navAriaLabel: string;
@@ -147,6 +165,7 @@ export interface SiteContent {
   identity: Identity;
   sections: Sections;
   hero: HeroStrings;
+  projectsSection: ProjectsSectionStrings;
   /** Navbar entries, in display order. Add one object to add a link. */
   nav: NavItem[];
   ui: UiStrings;
@@ -193,6 +212,19 @@ export const content: SiteContent = {
     primaryCta: "View Projects",
     secondaryCta: "Download Resume",
     scrollHint: "Scroll down to Ask my AI",
+  },
+
+  // Intro from CONTENT.md "Projects section"; button labels from DESIGN.md §4.
+  projectsSection: {
+    intro: "Production LLM systems I've designed, benchmarked, and deployed end to end.",
+    linkButtons: [
+      { key: "liveDemo", label: "Live Demo", ariaLabel: "Live demo of {project}" },
+      { key: "apiDocs", label: "API Docs", ariaLabel: "API docs of {project}" },
+      { key: "github", label: "GitHub", ariaLabel: "GitHub repository of {project}" },
+    ],
+    pipelineAriaLabel: "Safety pipeline stages",
+    metricsAriaLabel: "Headline metrics",
+    tagsAriaLabel: "Tech stack",
   },
 
   // Labels from DESIGN.md §1 Navbar: Projects · Experience · Skills · Contact + "Resume".

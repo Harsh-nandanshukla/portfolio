@@ -21,6 +21,9 @@ Items marked `TODO` must be filled in by Harsh. Do not invent them.
 - B.Tech, Major in Materials & Metallurgical Engineering, Minor in Artificial Intelligence
 - Aug 2023 – Present · CGPA 7.53 (show CGPA on site: no)
 
+## Projects section
+- **Intro:** Production LLM systems I've designed, benchmarked, and deployed end to end.
+
 ## Projects
 
 ### 1. LLM Guardrails Gateway (featured) — June 2026
