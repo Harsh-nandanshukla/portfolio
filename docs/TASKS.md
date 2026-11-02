@@ -41,8 +41,8 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] 🔍 Review
 
 ## Phase 5 — Skills
-- [ ] Two opposite-direction logo Marquee rows (pause on hover, faded edges)
-- [ ] Grouped text skill list below
+- [x] Two opposite-direction logo Marquee rows (pause on hover, faded edges)
+- [x] Grouped text skill list below
 - [ ] 🔍 Review
 
 ## Phase 6 — Contact & footer

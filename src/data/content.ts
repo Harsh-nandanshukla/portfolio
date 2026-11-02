@@ -85,10 +85,10 @@ export interface EntryLink {
 export interface Skill {
   name: string;
   category: string;
-  /** Key into src/lib/skill-icons.ts (added in Phase 5). */
+  /** Key into src/lib/skill-icons.ts. Missing or unknown key → the skill renders as a text pill. */
   icon?: string;
-  /** Show in the scrolling marquee rows (decided in Phase 5). */
-  marquee?: boolean;
+  /** Show in the scrolling marquee rows. Every skill always appears in the grouped list. */
+  marquee: boolean;
 }
 
 export interface Certification {
@@ -421,43 +421,44 @@ export const content: SiteContent = {
   ],
 
   // Category order on the site = order of first appearance here.
+  // No icon: concepts (list only) or brands whose logo isn't in react-icons' Simple Icons set (text pill in the marquee).
   skills: [
-    { name: "Python", category: "Programming" },
-    { name: "C/C++", category: "Programming" },
-    { name: "SQL", category: "Programming" },
+    { name: "Python", category: "Programming", icon: "python", marquee: true },
+    { name: "C/C++", category: "Programming", icon: "cplusplus", marquee: true },
+    { name: "SQL", category: "Programming", marquee: false },
 
-    { name: "PyTorch", category: "AI/ML" },
-    { name: "TensorFlow", category: "AI/ML" },
-    { name: "Scikit-learn", category: "AI/ML" },
-    { name: "Pandas", category: "AI/ML" },
-    { name: "NumPy", category: "AI/ML" },
-    { name: "Computer Vision", category: "AI/ML" },
-    { name: "Vision Transformers", category: "AI/ML" },
-    { name: "GANs", category: "AI/ML" },
-    { name: "NLP", category: "AI/ML" },
+    { name: "PyTorch", category: "AI/ML", icon: "pytorch", marquee: true },
+    { name: "TensorFlow", category: "AI/ML", icon: "tensorflow", marquee: true },
+    { name: "Scikit-learn", category: "AI/ML", icon: "scikitlearn", marquee: true },
+    { name: "Pandas", category: "AI/ML", icon: "pandas", marquee: true },
+    { name: "NumPy", category: "AI/ML", icon: "numpy", marquee: true },
+    { name: "Computer Vision", category: "AI/ML", marquee: false },
+    { name: "Vision Transformers", category: "AI/ML", marquee: false },
+    { name: "GANs", category: "AI/ML", marquee: false },
+    { name: "NLP", category: "AI/ML", marquee: false },
 
-    { name: "LangChain", category: "LLM & GenAI" },
-    { name: "LangGraph", category: "LLM & GenAI" },
-    { name: "RAG", category: "LLM & GenAI" },
-    { name: "Prompt Engineering", category: "LLM & GenAI" },
-    { name: "OpenAI API", category: "LLM & GenAI" },
-    { name: "Hugging Face Transformers", category: "LLM & GenAI" },
-    { name: "Qdrant", category: "LLM & GenAI" },
+    { name: "LangChain", category: "LLM & GenAI", icon: "langchain", marquee: true },
+    { name: "LangGraph", category: "LLM & GenAI", icon: "langgraph", marquee: true },
+    { name: "RAG", category: "LLM & GenAI", marquee: false },
+    { name: "Prompt Engineering", category: "LLM & GenAI", marquee: false },
+    { name: "OpenAI API", category: "LLM & GenAI", marquee: true },
+    { name: "Hugging Face Transformers", category: "LLM & GenAI", icon: "huggingface", marquee: true },
+    { name: "Qdrant", category: "LLM & GenAI", icon: "qdrant", marquee: true },
 
-    { name: "FastAPI", category: "Backend" },
-    { name: "REST APIs", category: "Backend" },
-    { name: "PostgreSQL", category: "Backend" },
-    { name: "Redis", category: "Backend" },
+    { name: "FastAPI", category: "Backend", icon: "fastapi", marquee: true },
+    { name: "REST APIs", category: "Backend", marquee: false },
+    { name: "PostgreSQL", category: "Backend", icon: "postgresql", marquee: true },
+    { name: "Redis", category: "Backend", icon: "redis", marquee: true },
 
-    { name: "Docker", category: "Cloud & DevOps" },
-    { name: "Docker Compose", category: "Cloud & DevOps" },
-    { name: "Oracle Cloud (OCI)", category: "Cloud & DevOps" },
-    { name: "AWS EC2", category: "Cloud & DevOps" },
-    { name: "Nginx", category: "Cloud & DevOps" },
-    { name: "Git", category: "Cloud & DevOps" },
-    { name: "Linux", category: "Cloud & DevOps" },
+    { name: "Docker", category: "Cloud & DevOps", icon: "docker", marquee: true },
+    { name: "Docker Compose", category: "Cloud & DevOps", icon: "docker", marquee: false },
+    { name: "Oracle Cloud (OCI)", category: "Cloud & DevOps", marquee: true },
+    { name: "AWS EC2", category: "Cloud & DevOps", marquee: true },
+    { name: "Nginx", category: "Cloud & DevOps", icon: "nginx", marquee: true },
+    { name: "Git", category: "Cloud & DevOps", icon: "git", marquee: true },
+    { name: "Linux", category: "Cloud & DevOps", icon: "linux", marquee: true },
 
-    { name: "Claude Code", category: "AI dev tools" },
+    { name: "Claude Code", category: "AI dev tools", icon: "claudecode", marquee: true },
   ],
 
   certifications: [

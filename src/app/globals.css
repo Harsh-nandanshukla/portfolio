@@ -63,6 +63,16 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  /* Magic UI Marquee (src/components/ui/marquee.tsx): one copy slides its own width + gap, then loops */
+  --animate-marquee: marquee var(--duration) infinite linear;
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
 }
 
 :root {
@@ -188,7 +198,6 @@
   }
 }
 
-
 /* ---------- Hero name intro sequence (states documented in src/lib/intro.ts) ----------
    "play" is set before first paint, so the letters and the rest of the hero never flash.
    Without JavaScript there is no data-intro attribute and everything stays visible. */
@@ -296,5 +305,32 @@ html:not([data-intro]) [data-reveal] {
 @keyframes border-beam-spin {
   to {
     rotate: 360deg;
+  }
+}
+
+/* ---------- Marquee (Skills; src/components/ui/marquee.tsx) ----------
+   Edge fade is a mask (alpha only, no colour). Off-screen rows are paused.
+   Reduced motion: no scrolling, the duplicate copies are hidden and the first copy wraps into a
+   static centred row (done here, not in React, so server and client HTML match). */
+[data-marquee][data-fade-edges] {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+[data-marquee][data-offscreen] > [data-marquee-track] {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-marquee] > [data-marquee-track] {
+    animation: none;
+  }
+  [data-marquee] > [data-marquee-copy] {
+    display: none;
+  }
+  [data-marquee] > [data-marquee-track]:first-child {
+    flex-shrink: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  [data-marquee][data-fade-edges] {
+    mask-image: none;
   }
 }
