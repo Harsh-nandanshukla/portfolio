@@ -43,7 +43,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 ## Phase 5 — Skills
 - [x] Two opposite-direction logo Marquee rows (pause on hover, faded edges)
 - [x] Grouped text skill list below
-- [ ] 🔍 Review
+- [x] 🔍 Review
 
 ## Phase 6 — Contact & footer
 - [ ] Closing line, copy-to-clipboard email with toast, social icons, footer

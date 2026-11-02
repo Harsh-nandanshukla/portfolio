@@ -60,3 +60,6 @@ docs/             these .md files
 9. **Commit after each section** with a clear message, e.g. `feat: hero section`.
 10. **Lists render from data.** Skills, projects, experience, and tags all come from
     `src/data/content.ts`. Adding an item must never require editing a component.
+
+## Commands
+Known issue: on this Windows setup the dev server sometimes stops picking up globals.css changes (stale CSS). Fix: stop the server, delete .next (Remove-Item -Recurse -Force .next), run npm run dev again.
