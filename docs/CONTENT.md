@@ -70,6 +70,7 @@ Items marked `TODO` must be filled in by Harsh. Do not invent them.
 - Designed a U-Net-based GAN reconstruction pipeline with a multi-objective loss
   (adversarial + MSE + cross-entropy) across 9 experimental phases.
 - **Highlight metric:** 6.66% → ~27% accuracy under attack (4× recovery)
+- **Link:** Research code https://github.com/Harsh-nandanshukla/Exploring_GAN_based_Defense_Strategy_for_Adversarial_Images_using_Vision_Transformer
 
 ### Research Intern — Ganpat University · April – May 2025
 - Sentiment & sarcasm detection on a 1.3M-comment Reddit dataset.
@@ -86,6 +87,7 @@ Items marked `TODO` must be filled in by Harsh. Do not invent them.
 
 ## Certifications
 - Advanced Learning Algorithms — Stanford Online & DeepLearning.AI (Coursera)
+- **Link:** Verify https://www.coursera.org/account/accomplishments/verify/DA2QLL1E433U
 
 ## SEO
 - **Title:** Harsh Nandan Shukla — AI/ML Engineer

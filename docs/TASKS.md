@@ -36,7 +36,8 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] 🔍 Review
 
 ## Phase 4 — Experience
-- [ ] Tracing Beam timeline with 3 entries and highlight metrics
+- [x] Tracing Beam timeline with 3 entries and highlight metrics
+- [x] Education + certification compact entries at the end of the timeline
 - [ ] 🔍 Review
 
 ## Phase 5 — Skills

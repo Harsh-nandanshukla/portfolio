@@ -73,6 +73,13 @@ export interface ExperienceEntry {
   mentor?: string;
   points: string[];
   highlightMetric?: string;
+  /** Research code repository (shown as the "Research code" button). */
+  link?: EntryLink;
+}
+
+/** An external link on a timeline entry. Button text and accessible name come from content.experienceSection. */
+export interface EntryLink {
+  href: string;
 }
 
 export interface Skill {
@@ -87,6 +94,37 @@ export interface Skill {
 export interface Certification {
   name: string;
   issuer: string;
+  /** Certificate verification page (shown as the "Verify" button). */
+  link?: EntryLink;
+}
+
+/** Experience & Research section strings. The heading is sections.experience.label. */
+export interface ExperienceSectionStrings {
+  /** Shown before entry.mentor. */
+  mentorLabel: string;
+  /** Screen-reader label for an entry's highlight metric. */
+  highlightAriaLabel: string;
+  researchCode: {
+    label: string;
+    /** Accessible name; "{title}" is replaced with the research title (or the organization). */
+    ariaLabel: string;
+  };
+  education: {
+    /** Small mono label on the compact card. */
+    label: string;
+    /** Degree line; {degree}, {major} and {minor} come from content.education. */
+    degreeLine: string;
+    /** Shown only when education.showCgpa is true. */
+    cgpaLine: string;
+  };
+  certification: {
+    label: string;
+    verify: {
+      label: string;
+      /** Accessible name; "{name}" is replaced with the certification name. */
+      ariaLabel: string;
+    };
+  };
 }
 
 export interface Seo {
@@ -168,6 +206,7 @@ export interface SiteContent {
   sections: Sections;
   hero: HeroStrings;
   projectsSection: ProjectsSectionStrings;
+  experienceSection: ExperienceSectionStrings;
   /** Navbar entries, in display order. Add one object to add a link. */
   nav: NavItem[];
   ui: UiStrings;
@@ -228,6 +267,21 @@ export const content: SiteContent = {
     metricsAriaLabel: "Headline metrics",
     benchmarksHeading: "Benchmarks",
     tagsAriaLabel: "Tech stack",
+  },
+
+  experienceSection: {
+    mentorLabel: "Mentor:",
+    highlightAriaLabel: "Highlight",
+    researchCode: { label: "Research code", ariaLabel: "Research code for {title}" },
+    education: {
+      label: "Education",
+      degreeLine: "{degree}, {major}, Minor in {minor}",
+      cgpaLine: "CGPA {cgpa}",
+    },
+    certification: {
+      label: "Certification",
+      verify: { label: "Verify", ariaLabel: "Verify {name} certificate" },
+    },
   },
 
   // Labels from DESIGN.md §1 Navbar: Projects · Experience · Skills · Contact + "Resume".
@@ -349,6 +403,9 @@ export const content: SiteContent = {
         "Designed a U-Net-based GAN reconstruction pipeline with a multi-objective loss (adversarial + MSE + cross-entropy) across 9 experimental phases.",
       ],
       highlightMetric: "6.66% → ~27% accuracy under attack (4× recovery)",
+      link: {
+        href: "https://github.com/Harsh-nandanshukla/Exploring_GAN_based_Defense_Strategy_for_Adversarial_Images_using_Vision_Transformer",
+      },
     },
     {
       id: "ganpat-university",
@@ -407,6 +464,7 @@ export const content: SiteContent = {
     {
       name: "Advanced Learning Algorithms",
       issuer: "Stanford Online & DeepLearning.AI (Coursera)",
+      link: { href: "https://www.coursera.org/account/accomplishments/verify/DA2QLL1E433U" },
     },
   ],
 
