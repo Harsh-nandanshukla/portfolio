@@ -46,7 +46,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] 🔍 Review
 
 ## Phase 6 — Contact & footer
-- [ ] Closing line, copy-to-clipboard email with toast, social icons, footer
+- [x] Closing line, copy-to-clipboard email with toast, social icons, footer
 - [ ] 🔍 Review
 
 ## Phase 7 — Ask my AI

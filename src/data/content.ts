@@ -194,6 +194,28 @@ export interface ProjectsSectionStrings {
   tagsAriaLabel: string;
 }
 
+/** Contact section + footer strings (CONTENT.md "Contact section", DESIGN.md §7). Email, links and resume come from `identity`. */
+export interface ContactSectionStrings {
+  closingLine: string;
+  /** The word(s) inside closingLine shown with the gradient. */
+  closingHighlight: string;
+  /** Accessible name of the big email button; "{email}" is replaced with the address. */
+  copyEmailAriaLabel: string;
+  /** Toast text after a successful copy (also announced to screen readers). */
+  copied: string;
+  sendEmail: string;
+  githubAriaLabel: string;
+  linkedinAriaLabel: string;
+  resume: string;
+  /** Screen-reader label for the row of links. */
+  linksAriaLabel: string;
+  footer: {
+    /** DESIGN.md §7 */
+    line: string;
+    backToTop: string;
+  };
+}
+
 /** Small interface strings (screen-reader labels etc.). */
 export interface UiStrings {
   navAriaLabel: string;
@@ -207,6 +229,7 @@ export interface SiteContent {
   hero: HeroStrings;
   projectsSection: ProjectsSectionStrings;
   experienceSection: ExperienceSectionStrings;
+  contactSection: ContactSectionStrings;
   /** Navbar entries, in display order. Add one object to add a link. */
   nav: NavItem[];
   ui: UiStrings;
@@ -267,6 +290,22 @@ export const content: SiteContent = {
     metricsAriaLabel: "Headline metrics",
     benchmarksHeading: "Benchmarks",
     tagsAriaLabel: "Tech stack",
+  },
+
+  contactSection: {
+    closingLine: "Let's build something intelligent.",
+    closingHighlight: "intelligent",
+    copyEmailAriaLabel: "Copy email address {email}",
+    copied: "Copied",
+    sendEmail: "Send email",
+    githubAriaLabel: "Harsh's GitHub",
+    linkedinAriaLabel: "Harsh's LinkedIn",
+    resume: "Resume",
+    linksAriaLabel: "Profiles and resume",
+    footer: {
+      line: "© 2026 Harsh Nandan Shukla · Built with Next.js",
+      backToTop: "Back to top",
+    },
   },
 
   experienceSection: {

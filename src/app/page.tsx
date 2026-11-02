@@ -5,6 +5,7 @@ import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
 import { Skills } from "@/components/sections/Skills";
 import { Contact } from "@/components/sections/Contact";
+import { Footer } from "@/components/Footer";
 
 // Layout (DESIGN.md): max width 1120px, side padding 16px / 24px (md+),
 // section spacing 80px / 128px (md+). md = 768px.
@@ -22,6 +23,7 @@ export default function Home() {
         <Skills />
         <Contact />
       </main>
+      <Footer />
     </>
   );
 }

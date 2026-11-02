@@ -89,6 +89,9 @@ Items marked `TODO` must be filled in by Harsh. Do not invent them.
 - Advanced Learning Algorithms — Stanford Online & DeepLearning.AI (Coursera)
 - **Link:** Verify https://www.coursera.org/account/accomplishments/verify/DA2QLL1E433U
 
+## Contact section
+- **Closing line:** Let's build something intelligent.
+
 ## SEO
 - **Title:** Harsh Nandan Shukla — AI/ML Engineer
 - **Description:** AI/ML engineer building production LLM systems: guardrails, RAG, and agent evaluation.
