@@ -245,7 +245,8 @@ html:not([data-intro]) [data-text-generate] span {
   }
 }
 
-/* <Reveal> content is fully visible and still under reduced motion, even before JS loads */
+/* <Reveal> content is fully visible and still under reduced motion, even before JS loads.
+   (Reveal's own starting styles are the same for everyone, so these rules do the reduced-motion work.) */
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] {
     opacity: 1 !important;
@@ -257,6 +258,13 @@ html:not([data-intro]) [data-text-generate] span {
     filter: none !important;
   }
 }
+/* Without JavaScript <html> never gets data-intro (set by the inline head script), so <Reveal> content
+   would stay at its hidden starting style: show it. */
+html:not([data-intro]) [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 /* ---------- Border Beam (featured project tile; src/components/ui/border-beam.tsx) ----------
    A conic "comet" spins behind a mask that only lets the border ring through.
    Only `rotate` animates. Container units size the comet to cover any tile shape. */

@@ -38,7 +38,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 ## Phase 4 — Experience
 - [x] Tracing Beam timeline with 3 entries and highlight metrics
 - [x] Education + certification compact entries at the end of the timeline
-- [ ] 🔍 Review
+- [x] 🔍 Review
 
 ## Phase 5 — Skills
 - [ ] Two opposite-direction logo Marquee rows (pause on hover, faded edges)

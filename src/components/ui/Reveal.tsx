@@ -6,8 +6,10 @@ import { motion, useReducedMotion, type Transition, type Variants } from "motion
 /*
  * Scroll reveal (DESIGN.md Motion): fade + 16px rise, 0.5s ease-out, plays once when in view.
  * <Reveal stagger> fades its <RevealItem> children in one after another (0.08s apart).
- * Under prefers-reduced-motion everything shows instantly with no movement
- * (globals.css also forces this via [data-reveal], so there is no flash before JS loads).
+ * Under prefers-reduced-motion everything shows instantly with no movement: globals.css forces
+ * [data-reveal] visible (also before JS loads, and without JS). The starting styles below never depend
+ * on the reduced-motion setting, so server HTML and the first client render match (no hydration
+ * warning); only the timing does (DECISIONS #51).
  */
 
 const RISE_PX = 16;
@@ -17,7 +19,7 @@ const STAGGER_S = 0.08;
 function itemVariants(reduce: boolean): Variants {
   const transition: Transition = reduce ? { duration: 0 } : { duration: DURATION_S, ease: "easeOut" };
   return {
-    hidden: { opacity: reduce ? 1 : 0, y: reduce ? 0 : RISE_PX },
+    hidden: { opacity: 0, y: RISE_PX },
     visible: { opacity: 1, y: 0, transition },
   };
 }
