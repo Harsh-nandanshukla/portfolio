@@ -47,7 +47,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 
 ## Phase 6 — Contact & footer
 - [x] Closing line, copy-to-clipboard email with toast, social icons, footer
-- [ ] 🔍 Review
+- [x] 🔍 Review
 
 ## Phase 7 — Ask my AI
 - [ ] Chat card UI: input, suggestion chips, typing indicator
