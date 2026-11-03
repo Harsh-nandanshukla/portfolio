@@ -53,7 +53,7 @@ Items marked `TODO` must be filled in by Harsh. Do not invent them.
   IP rate limiting; self-hosted Qdrant and Redis on an OCI ARM VM behind Nginx/HTTPS.
 - **Tags:** LangChain · Qdrant · FastAPI · Redis · Docker · OCI
 - **Links:** Live Demo https://137-23-46-16.sslip.io/harshgpt-ui/ · API Docs https://137-23-46-16.sslip.io/harshgpt/docs · GitHub TODO
-- **Also powers:** the "Ask my AI" section (endpoint: TODO)
+- **Also powers:** the "Ask my AI" section (endpoint: POST https://137-23-46-16.sslip.io/harshgpt/chat — set as `NEXT_PUBLIC_HARSHGPT_URL` in `.env.local`)
 
 ## Experience & Research (timeline order: newest first)
 

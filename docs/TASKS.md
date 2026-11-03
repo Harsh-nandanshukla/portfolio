@@ -50,9 +50,9 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] 🔍 Review
 
 ## Phase 7 — Ask my AI
-- [ ] Chat card UI: input, suggestion chips, typing indicator
-- [ ] Connect to the HarshGPT API (streaming if supported), with an error fallback
-- [ ] Confirm CORS on the HarshGPT backend allows the portfolio domain
+- [x] Chat card UI: input, suggestion chips, typing indicator
+- [x] Connect to the HarshGPT API (streaming if supported), with an error fallback
+- [x] Confirm CORS on the HarshGPT backend allows the portfolio domain
 - [ ] 🔍 Review with real questions
 
 ## Phase 8 — Polish & ship

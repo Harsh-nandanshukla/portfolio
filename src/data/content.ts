@@ -216,6 +216,32 @@ export interface ContactSectionStrings {
   };
 }
 
+/** Ask my AI section strings (DESIGN.md §3; chips per DECISIONS). The endpoint comes from .env.local. */
+export interface AskAiSectionStrings {
+  heading: string;
+  placeholder: string;
+  /** Accessible name of the question input. */
+  inputAriaLabel: string;
+  sendAriaLabel: string;
+  /** Suggestion chips; clicking one asks it right away. Add one string to add a chip. */
+  chips: string[];
+  chipsAriaLabel: string;
+  conversationAriaLabel: string;
+  youLabel: string;
+  aiLabel: string;
+  /** Screen-reader text for the typing indicator. */
+  thinking: string;
+  sourcesLabel: string;
+  /** One source line; "{source}" and "{page}" are replaced with the API values as-is. */
+  sourceLine: string;
+  /** Shown on HTTP 429 (the shared hourly limit). */
+  rateLimitMessage: string;
+  /** Shown on any other failure (missing endpoint, network/CORS, timeout, bad response). */
+  errorMessage: string;
+  /** Resume link shown under both failure messages (href = identity.resume). */
+  resumeLink: string;
+}
+
 /** Small interface strings (screen-reader labels etc.). */
 export interface UiStrings {
   navAriaLabel: string;
@@ -227,6 +253,7 @@ export interface SiteContent {
   identity: Identity;
   sections: Sections;
   hero: HeroStrings;
+  askAiSection: AskAiSectionStrings;
   projectsSection: ProjectsSectionStrings;
   experienceSection: ExperienceSectionStrings;
   contactSection: ContactSectionStrings;
@@ -239,7 +266,7 @@ export interface SiteContent {
   skills: Skill[];
   certifications: Certification[];
   seo: Seo;
-  /** Endpoint for the "Ask my AI" section. The real value goes in .env.local (NEXT_PUBLIC_HARSHGPT_URL). */
+  /** Endpoint for the "Ask my AI" section (CONTENT.md, for reference). The app reads it from .env.local (NEXT_PUBLIC_HARSHGPT_URL). */
   harshgptEndpoint: string | Todo;
 }
 
@@ -278,6 +305,28 @@ export const content: SiteContent = {
     scrollHint: "Scroll down to Ask my AI",
   },
 
+  // DESIGN.md §3. Chips name Harsh because retrieval misses "his" (DECISIONS #62).
+  askAiSection: {
+    heading: "Ask my AI about me",
+    placeholder: "What has Harsh built with LLMs?",
+    inputAriaLabel: "Ask a question about Harsh",
+    sendAriaLabel: "Send question",
+    chips: [
+      "What's Harsh's strongest project?",
+      "Tell me about Harsh's research",
+      "What's Harsh's tech stack?",
+    ],
+    chipsAriaLabel: "Suggested questions",
+    conversationAriaLabel: "Conversation with HarshGPT",
+    youLabel: "You",
+    aiLabel: "HarshGPT",
+    thinking: "HarshGPT is thinking…",
+    sourcesLabel: "Sources",
+    sourceLine: "{source} · p. {page}",
+    rateLimitMessage: "My AI has hit its hourly limit — try again later, or grab my resume instead.",
+    errorMessage: "My AI can't answer right now — try again in a moment, or grab my resume instead.",
+    resumeLink: "Open resume",
+  },
   // Intro from CONTENT.md "Projects section"; button labels from DESIGN.md §4.
   projectsSection: {
     intro: "Production LLM systems I've designed, benchmarked, and deployed end to end.",
@@ -515,5 +564,5 @@ export const content: SiteContent = {
     ogImage: { src: "/og-image.png", width: 1200, height: 630, file: "TODO" },
   },
 
-  harshgptEndpoint: "TODO",
+  harshgptEndpoint: "https://137-23-46-16.sslip.io/harshgpt/chat",
 };

@@ -87,7 +87,7 @@ Hidden while scrolling down, shown again while scrolling up. On mobile: name + m
 A wide glass card directly under the hero.
 - Heading: "Ask my AI about me"
 - Input placeholder: "What has Harsh built with LLMs?"
-- 3 suggestion chips: "What's his strongest project?", "Tell me about his research", "What's his tech stack?"
+- 3 suggestion chips: "What's Harsh's strongest project?", "Tell me about Harsh's research", "What's Harsh's tech stack?"
 - Answers stream into the card. Show a typing indicator while waiting.
 - If the API fails, show a friendly fallback message and link to the resume.
 
