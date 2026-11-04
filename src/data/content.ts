@@ -16,6 +16,8 @@ export interface Identity {
   email: string;
   github: string;
   linkedin: string;
+  /** Live site (CONTENT.md, for reference). The app reads its own address from NEXT_PUBLIC_SITE_URL. */
+  liveSite: string;
   /** Path under public/ (public/resume.pdf). */
   resume: string;
 }
@@ -281,6 +283,7 @@ const identity: Identity = {
   email: "shuklaharshnandan@gmail.com",
   github: "https://github.com/Harsh-nandanshukla",
   linkedin: "https://www.linkedin.com/in/harsh-shukla-a87b0a2b0/",
+  liveSite: "https://harsh-n-shukla.vercel.app",
   resume: "/resume.pdf",
 };
 

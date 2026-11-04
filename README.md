@@ -1,3 +1,13 @@
+# Harsh Nandan Shukla — Portfolio
+
+**Live site:** https://harsh-n-shukla.vercel.app
+
+Single-page portfolio (Next.js, TypeScript, Tailwind CSS, Motion). Every push to `main` redeploys on Vercel.
+Environment variables (`.env.local` locally, Vercel project settings in production):
+`NEXT_PUBLIC_HARSHGPT_URL` (Ask my AI endpoint) and `NEXT_PUBLIC_SITE_URL` (the site's public address).
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

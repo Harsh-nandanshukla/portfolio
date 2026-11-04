@@ -13,6 +13,7 @@ Items marked `TODO` must be filled in by Harsh. Do not invent them.
 - **Email:** shuklaharshnandan@gmail.com
 - **GitHub:** https://github.com/Harsh-nandanshukla
 - **LinkedIn:** https://www.linkedin.com/in/harsh-shukla-a87b0a2b0/
+- **Live site:** https://harsh-n-shukla.vercel.app
 - **Resume:** `/resume.pdf` (place the file in `public/`)
 - Do not show the phone number on the site.
 

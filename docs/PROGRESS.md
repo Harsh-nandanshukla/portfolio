@@ -13,6 +13,12 @@ Newest entry on top. Claude Code adds an entry at the end of every session or fi
 
 ---
 
+### 2026-11-04 — Deployed to Vercel
+**Done:** Harsh deployed the site to Vercel: https://harsh-n-shukla.vercel.app. `NEXT_PUBLIC_HARSHGPT_URL` and `NEXT_PUBLIC_SITE_URL` are set in Vercel. HarshGPT's CORS allows all origins, so no backend change was needed. Every push to `main` now redeploys automatically. Live URL added to CONTENT.md (Identity, mirrored as `identity.liveSite` in content.ts, reference only) and to the top of README.md. Deploy and CORS boxes ticked in TASKS.md.
+**Verified:** live site returns 200; canonical, `og:url` and `og:image` use https://harsh-n-shukla.vercel.app (so `NEXT_PUBLIC_SITE_URL` is picked up).
+**Files changed:** docs/TASKS.md, docs/CONTENT.md, docs/PROGRESS.md, README.md, src/data/content.ts
+**Next:** Lighthouse on the live site (mobile 90+ check, DECISIONS #38 / #68), then 🔍 final review on a real phone, then add the site link to resume, LinkedIn and GitHub profile README
+
 ### 2026-11-04 — Phase 8: mobile skips intro, short chat placeholder
 **Done:** Harsh chose LCP option B. The pre-paint script (`src/lib/intro.ts`) now sets `data-intro="skip"` when `(max-width: 767px)` matches (`INTRO_SKIP_QUERY`), so phones never hide the name and get the normal fade-in; desktop / tablet 768px+ unchanged (#68). Chat input: below 640px the placeholder is `askAiSection.placeholderShort` ("Ask about Harsh's work"), wider screens keep "What has Harsh built with LLMs?" (#69). lint, tsc, build all exit 0.
 **Verified (headless Edge, dev server, fresh session per width, HarshGPT blocked):** 1280 / 768 → `play` (intro runs); 767 / 639 / 375 / 360 → `skip` at DOM ready, name letters at full opacity, no particle canvas; placeholder short below 640px and fits (173px text in 188px at 360px, 203px at 375px), long from 640px up; no horizontal scroll, no console errors.

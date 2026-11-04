@@ -61,7 +61,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] Reduced-motion pass
 - [~] Lighthouse: performance 90+, accessibility 90+ (desktop 99–100; mobile 89 median after #68; re-check real scores on Vercel)
 - [x] `npm run build` passes with no errors
-- [ ] Push to GitHub, deploy on Vercel, add env variable in Vercel
-- [ ] Add CORS for the Vercel domain on HarshGPT
+- [x] Push to GitHub, deploy on Vercel, add env variable in Vercel
+- [x] Add CORS for the Vercel domain on HarshGPT (not needed: CORS allows all origins)
 - [ ] 🔍 Final review on a real phone
 - [ ] Add the site link to resume, LinkedIn, and GitHub profile README
