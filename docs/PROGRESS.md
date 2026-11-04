@@ -13,6 +13,13 @@ Newest entry on top. Claude Code adds an entry at the end of every session or fi
 
 ---
 
+### 2026-11-04 — Phase 7 review: citation tidy-up
+**Done:** Per Harsh's review: a trailing "(Source: X | Page: N)" citation is removed from the displayed answer (only that exact pattern at the very end), and source pages show counted from 1 (#64). lint, tsc, build all exit 0.
+**Verified (headless Edge, mocked replies only, no real API calls):** 1280 / 375px: the real reply's shape → citation stripped, sources "p. 3" / "p. 1" (API 2 / 0); a citation mid-text is left as-is; no horizontal scroll; no console errors.
+**Files changed:** src/components/ask-ai/ChatPanel.tsx, src/data/content.ts (comment), docs/TASKS.md, docs/DECISIONS.md
+**Review:** Reviewed and approved by Harsh.
+**Next:** Phase 8 — Polish & ship
+
 ### 2026-11-03 22:32 — Phase 7: Ask my AI
 **Done:** Glass chat card under the hero: heading, conversation log (`role="log"`, polite live region, scrolls inside the box only), typing indicator, 3 chips that ask right away, input (120-char API limit, counter from 100) + gradient send button; one question at a time. `src/lib/harshgpt.ts` POSTs `{ question }` to `NEXT_PUBLIC_HARSHGPT_URL` (now set in `.env.local`) with a 20s timeout. The answer fades in word by word (#59). 429 → hourly-limit message, any other failure → general fallback, both with an "Open resume" link (#61). Answer and sources shown as-is (#63). Chips name Harsh; DESIGN.md §3 chip line + CONTENT.md endpoint line updated (one-time exceptions, #62). Static cyan/violet glow behind the card; thin token-coloured scrollbar in the log. lint, tsc, build all exit 0.
 **Verified:** Port-3100 build with the variable empty → general fallback, 0 requests. Headless Edge on the dev server, one viewport at a time (1280 / 375 / 360, plus 375 reduced motion), with every HarshGPT request intercepted in the browser (no real calls before 22:30): success (typing indicator, chips/send disabled, answer + newline + sources exact, request body correct), 500, network failure and timeout (fallback at 20.0s) → general fallback, 429 → hourly-limit message + resume link; input cleared after send; no horizontal scroll; no console errors (reduced motion: only Motion's dev notice). After 22:30 exactly ONE real call from localhost:3000: preflight 200 + POST 200, `Access-Control-Allow-Origin: *`, answered in 6.7s and rendered correctly.

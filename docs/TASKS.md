@@ -53,7 +53,7 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] Chat card UI: input, suggestion chips, typing indicator
 - [x] Connect to the HarshGPT API (streaming if supported), with an error fallback
 - [x] Confirm CORS on the HarshGPT backend allows the portfolio domain
-- [ ] 🔍 Review with real questions
+- [x] 🔍 Review with real questions
 
 ## Phase 8 — Polish & ship
 - [ ] Resume PDF in `public/`, favicon, OG image, metadata

@@ -232,7 +232,7 @@ export interface AskAiSectionStrings {
   /** Screen-reader text for the typing indicator. */
   thinking: string;
   sourcesLabel: string;
-  /** One source line; "{source}" and "{page}" are replaced with the API values as-is. */
+  /** One source line; "{source}" = API value as-is, "{page}" = API page + 1 (pages counted from 1). */
   sourceLine: string;
   /** Shown on HTTP 429 (the shared hourly limit). */
   rateLimitMessage: string;

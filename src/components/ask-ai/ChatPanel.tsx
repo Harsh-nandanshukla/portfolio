@@ -12,7 +12,8 @@ import { cn } from "@/lib/utils";
  * The API returns the whole answer at once, so the answer "streams in" as a quick word-by-word
  * fade (opacity only, ≤ ~1s total, CSS so reduced motion shows it at once; DECISIONS #59).
  * Failures: 429 → the hourly-limit message, anything else → the general fallback; both link the resume.
- * The answer and its sources are shown exactly as the API returns them.
+ * The answer is shown as the API returns it, minus one trailing "(Source: X | Page: N)" citation (the sources
+ * are listed below it); source pages are shown counted from 1 (API page + 1). DECISIONS #64.
  */
 
 type Turn =
@@ -25,6 +26,13 @@ const COUNTER_FROM = 100;
 /** Word fade: per-word delay is at most this, and the whole answer finishes starting within REVEAL_TOTAL_MS. */
 const WORD_DELAY_MS = 30;
 const REVEAL_TOTAL_MS = 900;
+
+/** A trailing inline citation exactly like "(Source: X.pdf | Page: 2)" at the very end of the answer. */
+const TRAILING_CITATION = /\s*\(Source: [^()|]+ \| Page: \d+\)$/;
+
+function stripTrailingCitation(answer: string): string {
+  return answer.replace(TRAILING_CITATION, "");
+}
 
 const focusRing =
   "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-1";
@@ -142,7 +150,7 @@ export function ChatPanel() {
 
                   {turn.status === "done" && (
                     <div className="flex flex-col gap-3" data-answer="">
-                      <AnswerText text={turn.answer} />
+                      <AnswerText text={stripTrailingCitation(turn.answer)} />
                       {turn.sources.length > 0 && (
                         <div className="flex flex-col gap-1.5" data-sources="">
                           <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-text-muted">
@@ -154,7 +162,7 @@ export function ChatPanel() {
                                 key={k}
                                 className="max-w-full rounded-full border border-border px-2.5 py-1 font-mono text-[12px] break-all text-text-muted"
                               >
-                                {s.sourceLine.replace("{source}", src.source).replace("{page}", String(src.page))}
+                                {s.sourceLine.replace("{source}", src.source).replace("{page}", String(src.page + 1))}
                               </li>
                             ))}
                           </ul>
