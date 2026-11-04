@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 /* Outline link button for timeline entries (same look as the project tiles' secondary buttons). Opens in a new tab. */
 
 const focusRing =
-  "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-1";
+  "outline-none focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-2 focus-visible:outline-accent-1";
 
 interface EntryLinkButtonProps {
   href: string;

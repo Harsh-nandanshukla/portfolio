@@ -130,12 +130,10 @@ export interface ExperienceSectionStrings {
 export interface Seo {
   title: string;
   description: string;
+  /** Share image, generated at build time by src/app/opengraph-image.tsx (alt text = title). */
   ogImage: {
-    src: string;
     width: number;
     height: number;
-    /** The image file has not been created yet. */
-    file: string | Todo;
   };
 }
 
@@ -561,7 +559,7 @@ export const content: SiteContent = {
     title: "Harsh Nandan Shukla — AI/ML Engineer",
     description:
       "AI/ML engineer building production LLM systems: guardrails, RAG, and agent evaluation.",
-    ogImage: { src: "/og-image.png", width: 1200, height: 630, file: "TODO" },
+    ogImage: { width: 1200, height: 630 },
   },
 
   harshgptEndpoint: "https://137-23-46-16.sslip.io/harshgpt/chat",

@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
  */
 
 const focusRing =
-  "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-1";
+  "outline-none focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-2 focus-visible:outline-accent-1";
 const pill =
   "inline-flex h-10 items-center gap-2 rounded-full border border-border px-4 text-[14px] font-medium text-text-muted hover:border-text-muted/60 hover:text-text";
 const iconButton =

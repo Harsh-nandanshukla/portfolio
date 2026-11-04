@@ -56,11 +56,11 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
 - [x] 🔍 Review with real questions
 
 ## Phase 8 — Polish & ship
-- [ ] Resume PDF in `public/`, favicon, OG image, metadata
-- [ ] Full mobile pass at 375px / 768px
-- [ ] Reduced-motion pass
-- [ ] Lighthouse: performance 90+, accessibility 90+
-- [ ] `npm run build` passes with no errors
+- [x] Resume PDF in `public/`, favicon, OG image, metadata
+- [x] Full mobile pass at 375px / 768px
+- [x] Reduced-motion pass
+- [~] Lighthouse: performance 90+, accessibility 90+ (desktop 99–100; mobile perf ~80 median, waiting on Harsh's LCP choice)
+- [x] `npm run build` passes with no errors
 - [ ] Push to GitHub, deploy on Vercel, add env variable in Vercel
 - [ ] Add CORS for the Vercel domain on HarshGPT
 - [ ] 🔍 Final review on a real phone

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- "H" monogram. Colors = design tokens (--bg, --border, --accent-1 → --accent-2); keep in sync with globals.css. -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0A0A0F"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.25" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+  <path fill="url(#g)" d="M16 14h9v14h14V14h9v36h-9V36H25v14h-9z"/>
+</svg>

@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
  */
 
 const focusRing =
-  "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-1";
+  "outline-none focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-2 focus-visible:outline-accent-1";
 
 const ctaBase =
   "inline-flex h-12 items-center justify-center rounded-full px-6 text-[15px] font-medium transition-[opacity,background-color,border-color]";

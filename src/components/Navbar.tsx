@@ -31,7 +31,7 @@ const HIDE_OFFSET_PX = -96;
 const PANEL_ID = "mobile-nav-panel";
 
 const focusRing =
-  "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-1";
+  "outline-none focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-2 focus-visible:outline-accent-1";
 
 const linkClass = cn(
   "rounded-full px-4 py-2 text-sm text-text-muted transition-colors hover:text-text",

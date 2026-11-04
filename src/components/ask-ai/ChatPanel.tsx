@@ -35,7 +35,7 @@ function stripTrailingCitation(answer: string): string {
 }
 
 const focusRing =
-  "outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-1";
+  "outline-none focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-2 focus-visible:outline-accent-1";
 
 function AnswerText({ text }: { text: string }) {
   const tokens = text.split(/(\s+)/);
@@ -233,7 +233,7 @@ export function ChatPanel() {
             className={cn(
               "h-12 w-full rounded-full border border-border bg-bg/60 pl-5 text-base text-text placeholder:text-text-muted/80 hover:border-text-muted/40",
               input.length >= COUNTER_FROM ? "pr-16" : "pr-5",
-              "outline-none focus-visible:border-accent-1/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-1",
+              "outline-none focus-visible:border-accent-1/60 focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-2 focus-visible:outline-accent-1",
             )}
           />
           {input.length >= COUNTER_FROM && (

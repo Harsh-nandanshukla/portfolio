@@ -3,6 +3,7 @@ import { Geist, JetBrains_Mono, Orbitron } from "next/font/google";
 import { content } from "@/data/content";
 import { InlineScript } from "@/components/InlineScript";
 import { introModeScript } from "@/lib/intro";
+import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 // Geist = headings + body text
@@ -24,9 +25,26 @@ const orbitron = Orbitron({
   weight: "700",
 });
 
+// The OG / Twitter images and icons are added automatically by the file conventions
+// (opengraph-image.tsx, twitter-image.tsx, icon.svg, apple-icon.tsx).
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
   title: content.seo.title,
   description: content.seo.description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: content.identity.name,
+    title: content.seo.title,
+    description: content.seo.description,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: content.seo.title,
+    description: content.seo.description,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

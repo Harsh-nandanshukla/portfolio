@@ -16,7 +16,7 @@ export function Footer() {
         <a
           href={`#${content.sections.hero.id}`}
           data-back-to-top=""
-          className="inline-flex items-center gap-1.5 rounded-full px-2 py-1 font-mono text-[12px] uppercase tracking-[0.08em] text-text-muted outline-none hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-1"
+          className="inline-flex items-center gap-1.5 rounded-full px-2 py-1 font-mono text-[12px] uppercase tracking-[0.08em] text-text-muted outline-none hover:text-text focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-2 focus-visible:outline-accent-1"
         >
           <ArrowUp className="size-3.5" aria-hidden="true" />
           {backToTop}

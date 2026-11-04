@@ -7,6 +7,8 @@ import { SkillPill } from "@/components/skills/SkillPill";
  * row 1 scrolls right → left, row 2 left → right. Each row pauses on hover and fades at the edges.
  * The whole block is hidden from screen readers: the grouped list below is the accessible version.
  */
+const MIN_PILLS_FOR_TWO_COPIES = 10;
+
 export function SkillsMarquee({ skills }: { skills: Skill[] }) {
   const items = skills.filter((s) => s.marquee);
   if (items.length === 0) return null;
@@ -17,7 +19,16 @@ export function SkillsMarquee({ skills }: { skills: Skill[] }) {
   return (
     <div aria-hidden="true" className="flex flex-col gap-3">
       {rows.map((row, i) => (
-        <Marquee key={i} reverse={i % 2 === 1} pauseOnHover fadeEdges className="py-1">
+        <Marquee
+          key={i}
+          reverse={i % 2 === 1}
+          // A seamless loop needs one copy wider than the row (max 1072px). 10+ pills ≈ 1200px+,
+          // so 2 copies are enough and halve the page's HTML; shorter rows keep 4 (DECISIONS #66).
+          repeat={row.length >= MIN_PILLS_FOR_TWO_COPIES ? 2 : 4}
+          pauseOnHover
+          fadeEdges
+          className="py-1"
+        >
           {row.map((skill) => (
             <SkillPill key={skill.name} skill={skill} />
           ))}

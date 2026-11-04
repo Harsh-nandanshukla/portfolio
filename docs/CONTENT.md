@@ -95,4 +95,4 @@ Items marked `TODO` must be filled in by Harsh. Do not invent them.
 ## SEO
 - **Title:** Harsh Nandan Shukla — AI/ML Engineer
 - **Description:** AI/ML engineer building production LLM systems: guardrails, RAG, and agent evaluation.
-- **OG image:** `public/og-image.png` (TODO, 1200×630)
+- **OG image:** 1200×630, generated at build time by `src/app/opengraph-image.tsx` (name, label and tagline from this file)
