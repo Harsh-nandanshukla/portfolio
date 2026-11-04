@@ -6,7 +6,7 @@
  *   "play"    → set before first paint: the intro will run; CSS hides the letters and the rest of the hero
  *   "running" → the intro is animating (letters are controlled by their animations)
  *   "done"    → the intro finished or was skipped: the rest of the hero fades in
- *   "skip"    → already played this session, or reduced motion: normal subtle fade-in
+ *   "skip"    → already played this session, reduced motion, or a phone-width screen: normal subtle fade-in
  */
 
 export const INTRO_ATTR = "data-intro";
@@ -14,13 +14,19 @@ export const INTRO_STORAGE_KEY = "hns-intro-played";
 /** Fired on window when the intro finishes (or is skipped). */
 export const INTRO_DONE_EVENT = "hns:intro-done";
 
+/** Below this width the intro never plays (DECISIONS #68): phones get the normal fade-in for a fast LCP. Tailwind's md breakpoint. */
+export const INTRO_SKIP_QUERY = "(max-width: 767px)";
+
 export type IntroMode = "play" | "running" | "done" | "skip";
 
 /**
- * Runs in <head> before first paint. Decides "play" vs "skip".
+ * Runs in <head> before first paint. Decides "play" vs "skip" ("play" only on screens 768px+ wide,
+ * without reduced motion, first visit this session), so phones never hide the name.
  * If sessionStorage or matchMedia throws (e.g. blocked storage), it falls back to "skip".
  */
-export const introModeScript = `(function(){var m="skip";try{if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches&&!window.sessionStorage.getItem(${JSON.stringify(
+export const introModeScript = `(function(){var m="skip";try{if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches&&!window.matchMedia(${JSON.stringify(
+  INTRO_SKIP_QUERY,
+)}).matches&&!window.sessionStorage.getItem(${JSON.stringify(
   INTRO_STORAGE_KEY,
 )}))m="play"}catch(e){}document.documentElement.setAttribute(${JSON.stringify(INTRO_ATTR)},m)})();`;
 

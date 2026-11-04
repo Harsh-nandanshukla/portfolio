@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type FormEvent } from "react";
 import { ArrowUp, FileText } from "lucide-react";
 import { content } from "@/data/content";
 import { askHarshGpt, MAX_QUESTION_LENGTH, type HarshGptSource } from "@/lib/harshgpt";
@@ -32,6 +32,15 @@ const TRAILING_CITATION = /\s*\(Source: [^()|]+ \| Page: \d+\)$/;
 
 function stripTrailingCitation(answer: string): string {
   return answer.replace(TRAILING_CITATION, "");
+}
+
+/** Below Tailwind's sm breakpoint (640px) the long placeholder doesn't fit, so a shorter one is used. */
+const SHORT_PLACEHOLDER_QUERY = "(max-width: 639px)";
+
+function subscribeNarrow(onChange: () => void) {
+  const mql = window.matchMedia(SHORT_PLACEHOLDER_QUERY);
+  mql.addEventListener("change", onChange);
+  return () => mql.removeEventListener("change", onChange);
 }
 
 const focusRing =
@@ -75,6 +84,11 @@ function TypingIndicator({ label }: { label: string }) {
 
 export function ChatPanel() {
   const s = content.askAiSection;
+  const narrow = useSyncExternalStore(
+    subscribeNarrow,
+    () => window.matchMedia(SHORT_PLACEHOLDER_QUERY).matches,
+    () => false, // server render: long placeholder (swapped right after hydration on phones)
+  );
   const { resume } = content.identity;
   const [turns, setTurns] = useState<Turn[]>([]);
   const [input, setInput] = useState("");
@@ -226,7 +240,7 @@ export function ChatPanel() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             maxLength={MAX_QUESTION_LENGTH}
-            placeholder={s.placeholder}
+            placeholder={narrow ? s.placeholderShort : s.placeholder}
             aria-label={s.inputAriaLabel}
             autoComplete="off"
             enterKeyHint="send"

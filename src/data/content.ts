@@ -218,6 +218,8 @@ export interface ContactSectionStrings {
 export interface AskAiSectionStrings {
   heading: string;
   placeholder: string;
+  /** Shorter placeholder below 640px, where the long one gets cut off. */
+  placeholderShort: string;
   /** Accessible name of the question input. */
   inputAriaLabel: string;
   sendAriaLabel: string;
@@ -307,6 +309,7 @@ export const content: SiteContent = {
   askAiSection: {
     heading: "Ask my AI about me",
     placeholder: "What has Harsh built with LLMs?",
+    placeholderShort: "Ask about Harsh's work",
     inputAriaLabel: "Ask a question about Harsh",
     sendAriaLabel: "Send question",
     chips: [
